@@ -167,7 +167,7 @@ export default function PrivacyPolicy() {
             </ul>
             <p>
               Pour exercer ces droits, contactez-nous à :{' '}
-              <strong>contact@pixelcraft.studio</strong>
+              <strong>dayann@pixelcraft.mail</strong>
             </p>
           </Section>
 
@@ -186,7 +186,7 @@ export default function PrivacyPolicy() {
             </p>
             <ul>
               <li>
-                <strong>Email :</strong> contact@pixelcraft.studio
+                <strong>Email :</strong> dayann@pixelcraft.mail
               </li>
               <li>
                 <strong>Site :</strong>{' '}
