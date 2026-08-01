@@ -1,4 +1,4 @@
-import { Globe, Star, Mail, AppWindow, Layout, Cog, Video, Linkedin } from 'lucide-react';
+import { Globe, Star, Mail, Smartphone, Layers, Zap, Video, User } from 'lucide-react';
 
 const services = [
   {
@@ -23,21 +23,21 @@ const services = [
     shadow: 'shadow-emerald-500/20',
   },
   {
-    icon: AppWindow,
+    icon: Smartphone,
     title: 'Applications',
     description: 'Des applications web et mobile sur mesure, pensées pour vos utilisateurs et vos objectifs.',
     color: 'from-purple-500 to-pink-500',
     shadow: 'shadow-purple-500/20',
   },
   {
-    icon: Layout,
+    icon: Layers,
     title: 'WorkFlow sur Notion',
     description: 'Structurez et optimisez votre organisation grâce à des espaces Notion clés en main.',
     color: 'from-cyan-500 to-blue-500',
     shadow: 'shadow-cyan-500/20',
   },
   {
-    icon: Cog,
+    icon: Zap,
     title: 'Automatisation',
     description: 'Automatisez vos tâches répétitives et gagnez du temps grâce à des workflows intelligents.',
     color: 'from-rose-500 to-purple-500',
@@ -51,7 +51,7 @@ const services = [
     shadow: 'shadow-orange-500/20',
   },
   {
-    icon: Linkedin,
+    icon: User,
     title: 'Tutorat d\'un compte LinkedIn',
     description: 'Apprenez à maîtriser LinkedIn pour développer votre réseau et votre visibilité professionnelle.',
     color: 'from-violet-500 to-indigo-500',
@@ -66,7 +66,7 @@ export default function Services() {
         {/* Section header */}
         <div className="text-center mb-16">
           <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 mb-4">
-            <Cog size={14} className="text-primary-500" />
+            <Zap size={14} className="text-primary-500" />
             <span className="text-xs font-medium text-gray-600 uppercase tracking-wider">Nos Services</span>
           </span>
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight">
