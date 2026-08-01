@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
   useEffect(() => {
     // Scroll to top on page load
     window.scrollTo(0, 0);
-    
+
     // Handle hash navigation
     if (location.hash) {
       setTimeout(() => {
@@ -116,7 +116,7 @@ export default function PrivacyPolicy() {
               <li><strong>Droit d'opposition :</strong> vous opposer au traitement de vos données.</li>
             </ul>
             <p>
-              Pour exercer ces droits, contactez-nous à : <strong>dayann@pixelcraft.email</strong>
+              Pour exercer ces droits, contactez-nous à : <strong>contact@pixelcraft.studio</strong>
             </p>
           </Section>
 
@@ -128,14 +128,30 @@ export default function PrivacyPolicy() {
           </Section>
 
           <div id="mentions" className="pt-8 border-t border-gray-200">
+            <Section title="9. Mentions légales">
+              <p>
+                <strong>Éditeur du site :</strong> PixelCraft Studio<br />
+                <strong>Hébergement :</strong> Vercel Inc. — <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-primary-500 underline underline-offset-4 hover:text-primary-600">vercel.com</a><br />
+                <strong>Code source :</strong> <a href="https://github.com/adechokandayann272-stack/pixelcraft" target="_blank" rel="noopener noreferrer" className="text-primary-500 underline underline-offset-4 hover:text-primary-600">GitHub</a><br />
+                <strong>Site web :</strong> <a href="https://pixelcraft-bay.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-primary-500 underline underline-offset-4 hover:text-primary-600">pixelcraft-bay.vercel.app</a>
+              </p>
+            </Section>
+          </div>
+
+          <Section title="10. Modifications">
+            <p>
+              Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment. 
+              Les modifications prendront effet dès leur publication sur cette page. Nous vous encourageons 
+              à consulter régulièrement cette page pour rester informé.
+            </p>
           </Section>
 
-          <Section title="9. Contact">
+          <Section title="11. Contact">
             <p>
               Pour toute question relative à cette politique de confidentialité, vous pouvez nous contacter :
             </p>
             <ul>
-              <li><strong>Email :</strong> dayann@pixelcraft.email</li>
+              <li><strong>Email :</strong> contact@pixelcraft.studio</li>
               <li><strong>Site :</strong> <a href="https://pixelcraft-bay.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-primary-500 underline underline-offset-4 hover:text-primary-600">pixelcraft-bay.vercel.app</a></li>
             </ul>
           </Section>
