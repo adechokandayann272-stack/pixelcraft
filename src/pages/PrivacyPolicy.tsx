@@ -128,22 +128,6 @@ export default function PrivacyPolicy() {
           </Section>
 
           <div id="mentions" className="pt-8 border-t border-gray-200">
-            <Section title="9. Mentions légales">
-              <p>
-                <strong>Éditeur du site :</strong> PixelCraft Studio<br />
-                <strong>Hébergement :</strong> Vercel Inc. — <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-primary-500 underline underline-offset-4 hover:text-primary-600">vercel.com</a><br />
-                <strong>Code source :</strong> <a href="https://github.com/adechokandayann272-stack/pixelcraft" target="_blank" rel="noopener noreferrer" className="text-primary-500 underline underline-offset-4 hover:text-primary-600">GitHub</a><br />
-                <strong>Site web :</strong> <a href="https://pixelcraft-bay.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-primary-500 underline underline-offset-4 hover:text-primary-600">pixelcraft-bay.vercel.app</a>
-              </p>
-            </Section>
-          </div>
-
-          <Section title="10. Modifications">
-            <p>
-              Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment. 
-              Les modifications prendront effet dès leur publication sur cette page. Nous vous encourageons 
-              à consulter régulièrement cette page pour rester informé.
-            </p>
           </Section>
 
           <Section title="11. Contact">
