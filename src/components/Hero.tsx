@@ -54,8 +54,6 @@ export default function Hero() {
           {/* Stats */}
           <div className="mt-16 grid grid-cols-2 gap-6 max-w-xs mx-auto animate-fade-in" style={{ animationDelay: '0.6s' }}>
             {[
-              { value: '50+', label: 'Projets livrés' },
-              { value: '100%', label: 'Satisfaction' },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="text-2xl md:text-3xl font-bold text-gradient animate-count-up">{stat.value}</div>
