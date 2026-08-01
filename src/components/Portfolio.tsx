@@ -41,7 +41,7 @@ export default function Portfolio() {
             Nos <span className="text-gradient">réalisations</span>
           </h2>
           <p className="mt-4 text-gray-500 max-w-2xl mx-auto">
-            Découvrez nos derniers projets — des sites web sur mesure, livrés et en ligne.
+            Explorez nos projets de portfolio — des concepts web réalisés pour mettre en avant notre expertise.
           </p>
         </div>
 
