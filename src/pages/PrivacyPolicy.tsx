@@ -6,10 +6,8 @@ export default function PrivacyPolicy() {
   const location = useLocation();
 
   useEffect(() => {
-    // Scroll to top on page load
     window.scrollTo(0, 0);
 
-    // Handle hash navigation
     if (location.hash) {
       setTimeout(() => {
         const el = document.getElementById(location.hash.replace('#', ''));
@@ -48,18 +46,36 @@ export default function PrivacyPolicy() {
         <div className="prose-custom space-y-10">
           <Section title="1. Introduction">
             <p>
-              Bienvenue sur PixelCraft Studio (<a href="https://pixelcraft-bay.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-primary-500 underline underline-offset-4 hover:text-primary-600">pixelcraft-bay.vercel.app</a>). 
-              La protection de vos données personnelles est une priorité pour nous. Cette politique de confidentialité explique quelles informations nous collectons, 
-              comment nous les utilisons et quels sont vos droits.
+              Bienvenue sur PixelCraft Studio (
+              <a
+                href="https://pixelcraft-bay.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-500 underline underline-offset-4 hover:text-primary-600"
+              >
+                pixelcraft-bay.vercel.app
+              </a>
+              ). La protection de vos données personnelles est une priorité pour nous. Cette politique
+              de confidentialité explique quelles informations nous collectons, comment nous les
+              utilisons et quels sont vos droits.
             </p>
           </Section>
 
           <Section title="2. Données collectées">
             <p>Nous pouvons collecter les types de données suivants :</p>
             <ul>
-              <li><strong>Données de contact :</strong> nom, adresse email, numéro de téléphone lorsque vous utilisez notre formulaire de contact.</li>
-              <li><strong>Données de navigation :</strong> adresse IP, type de navigateur, pages visitées, durée de la visite via des cookies analytiques.</li>
-              <li><strong>Données de projet :</strong> informations que vous partagez volontairement dans le cadre d'une demande de devis ou de collaboration.</li>
+              <li>
+                <strong>Données de contact :</strong> nom, adresse email, numéro de téléphone
+                lorsque vous utilisez notre formulaire de contact.
+              </li>
+              <li>
+                <strong>Données de navigation :</strong> adresse IP, type de navigateur, pages
+                visitées, durée de la visite via des cookies analytiques.
+              </li>
+              <li>
+                <strong>Données de projet :</strong> informations que vous partagez volontairement
+                dans le cadre d'une demande de devis ou de collaboration.
+              </li>
             </ul>
           </Section>
 
@@ -69,90 +85,120 @@ export default function PrivacyPolicy() {
               <li>Répondre à vos demandes de contact et de devis.</li>
               <li>Améliorer l'expérience utilisateur de notre site.</li>
               <li>Établir des statistiques anonymes de fréquentation.</li>
-              <li>Vous envoyer des informations relatives à nos services, uniquement avec votre consentement.</li>
+              <li>
+                Vous envoyer des informations relatives à nos services, uniquement avec votre
+                consentement.
+              </li>
             </ul>
           </Section>
 
           <Section title="4. Cookies">
             <p>
-              Notre site peut utiliser des cookies pour améliorer votre expérience de navigation. Les cookies sont de petits fichiers texte 
-              stockés sur votre appareil. Vous pouvez à tout moment configurer votre navigateur pour refuser les cookies.
+              Notre site peut utiliser des cookies pour améliorer votre expérience de navigation.
+              Les cookies sont de petits fichiers texte stockés sur votre appareil. Vous pouvez à
+              tout moment configurer votre navigateur pour refuser les cookies.
             </p>
             <p>Types de cookies utilisés :</p>
             <ul>
-              <li><strong>Cookies essentiels :</strong> nécessaires au bon fonctionnement du site.</li>
-              <li><strong>Cookies analytiques :</strong> nous aident à comprendre comment les visiteurs interagissent avec le site.</li>
+              <li>
+                <strong>Cookies essentiels :</strong> nécessaires au bon fonctionnement du site.
+              </li>
+              <li>
+                <strong>Cookies analytiques :</strong> nous aident à comprendre comment les
+                visiteurs interagissent avec le site.
+              </li>
             </ul>
           </Section>
 
           <Section title="5. Partage des données">
             <p>
-              Nous ne vendons, n'échangeons ni ne louons vos données personnelles à des tiers. Vos informations peuvent être partagées 
-              uniquement dans les cas suivants :
+              Nous ne vendons, n'échangeons ni ne louons vos données personnelles à des tiers. Vos
+              informations peuvent être partagées uniquement dans les cas suivants :
             </p>
             <ul>
               <li>Avec votre consentement explicite.</li>
               <li>Pour se conformer à une obligation légale.</li>
-              <li>Avec des prestataires de confiance (hébergement Vercel, analytiques) qui s'engagent à respecter la confidentialité de vos données.</li>
+              <li>
+                Avec des prestataires de confiance (hébergement Vercel, analytiques) qui s'engagent
+                à respecter la confidentialité de vos données.
+              </li>
             </ul>
           </Section>
 
           <Section title="6. Sécurité des données">
             <p>
-              Nous mettons en œuvre des mesures de sécurité techniques et organisationnelles appropriées pour protéger vos données 
-              contre tout accès non autorisé, modification, divulgation ou destruction. Notre site est hébergé sur 
-              <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-primary-500 underline underline-offset-4 hover:text-primary-600"> Vercel</a>, 
-              qui garantit un haut niveau de sécurité.
+              Nous mettons en œuvre des mesures de sécurité techniques et organisationnelles
+              appropriées pour protéger vos données contre tout accès non autorisé, modification,
+              divulgation ou destruction. Notre site est hébergé sur{' '}
+              <a
+                href="https://vercel.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-500 underline underline-offset-4 hover:text-primary-600"
+              >
+                Vercel
+              </a>
+              , qui garantit un haut niveau de sécurité.
             </p>
           </Section>
 
           <Section title="7. Vos droits (RGPD)">
-            <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :</p>
+            <p>
+              Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez
+              des droits suivants :
+            </p>
             <ul>
-              <li><strong>Droit d'accès :</strong> obtenir une copie de vos données personnelles.</li>
-              <li><strong>Droit de rectification :</strong> corriger des données inexactes.</li>
-              <li><strong>Droit à l'effacement :</strong> demander la suppression de vos données.</li>
-              <li><strong>Droit à la portabilité :</strong> recevoir vos données dans un format structuré.</li>
-              <li><strong>Droit d'opposition :</strong> vous opposer au traitement de vos données.</li>
+              <li>
+                <strong>Droit d'accès :</strong> obtenir une copie de vos données personnelles.
+              </li>
+              <li>
+                <strong>Droit de rectification :</strong> corriger des données inexactes.
+              </li>
+              <li>
+                <strong>Droit à l'effacement :</strong> demander la suppression de vos données.
+              </li>
+              <li>
+                <strong>Droit à la portabilité :</strong> recevoir vos données dans un format
+                structuré.
+              </li>
+              <li>
+                <strong>Droit d'opposition :</strong> vous opposer au traitement de vos données.
+              </li>
             </ul>
             <p>
-              Pour exercer ces droits, contactez-nous à : <strong>contact@pixelcraft.studio</strong>
+              Pour exercer ces droits, contactez-nous à :{' '}
+              <strong>contact@pixelcraft.studio</strong>
             </p>
           </Section>
 
           <Section title="8. Conservation des données">
             <p>
-              Vos données personnelles sont conservées uniquement pendant la durée nécessaire aux finalités pour lesquelles elles 
-              ont été collectées, et en tout état de cause, conformément aux délais légaux en vigueur.
+              Vos données personnelles sont conservées uniquement pendant la durée nécessaire aux
+              finalités pour lesquelles elles ont été collectées, et en tout état de cause,
+              conformément aux délais légaux en vigueur.
             </p>
           </Section>
 
-          <div id="mentions" className="pt-8 border-t border-gray-200">
-            <Section title="9. Mentions légales">
-              <p>
-                <strong>Éditeur du site :</strong> PixelCraft Studio<br />
-                <strong>Hébergement :</strong> Vercel Inc. — <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-primary-500 underline underline-offset-4 hover:text-primary-600">vercel.com</a><br />
-                <strong>Code source :</strong> <a href="https://github.com/adechokandayann272-stack/pixelcraft" target="_blank" rel="noopener noreferrer" className="text-primary-500 underline underline-offset-4 hover:text-primary-600">GitHub</a><br />
-                <strong>Site web :</strong> <a href="https://pixelcraft-bay.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-primary-500 underline underline-offset-4 hover:text-primary-600">pixelcraft-bay.vercel.app</a>
-              </p>
-            </Section>
-          </div>
-
-          <Section title="10. Modifications">
+          <Section title="9. Contact">
             <p>
-              Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment. 
-              Les modifications prendront effet dès leur publication sur cette page. Nous vous encourageons 
-              à consulter régulièrement cette page pour rester informé.
-            </p>
-          </Section>
-
-          <Section title="11. Contact">
-            <p>
-              Pour toute question relative à cette politique de confidentialité, vous pouvez nous contacter :
+              Pour toute question relative à cette politique de confidentialité, vous pouvez nous
+              contacter :
             </p>
             <ul>
-              <li><strong>Email :</strong> contact@pixelcraft.studio</li>
-              <li><strong>Site :</strong> <a href="https://pixelcraft-bay.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-primary-500 underline underline-offset-4 hover:text-primary-600">pixelcraft-bay.vercel.app</a></li>
+              <li>
+                <strong>Email :</strong> contact@pixelcraft.studio
+              </li>
+              <li>
+                <strong>Site :</strong>{' '}
+                <a
+                  href="https://pixelcraft-bay.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary-500 underline underline-offset-4 hover:text-primary-600"
+                >
+                  pixelcraft-bay.vercel.app
+                </a>
+              </li>
             </ul>
           </Section>
         </div>
