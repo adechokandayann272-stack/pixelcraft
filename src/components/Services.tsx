@@ -1,4 +1,4 @@
-import { Globe, Palette, Smartphone, Zap, Search, ShieldCheck } from 'lucide-react';
+import { Globe, Palette, Smartphone, Zap, Search, ShieldCheck, Code2, BarChart3 } from 'lucide-react';
 
 const services = [
   {
@@ -42,6 +42,20 @@ const services = [
     description: 'Mises à jour régulières, sauvegardes et protection contre les menaces web.',
     color: 'from-rose-500 to-purple-500',
     shadow: 'shadow-rose-500/20',
+  },
+  {
+    icon: Code2,
+    title: 'Développement Sur Mesure',
+    description: 'Des fonctionnalités et applications web personnalisées adaptées à vos besoins métier.',
+    color: 'from-cyan-500 to-blue-500',
+    shadow: 'shadow-cyan-500/20',
+  },
+  {
+    icon: BarChart3,
+    title: 'Analytics & Reporting',
+    description: 'Suivi des performances, tableaux de bord et rapports pour piloter votre croissance digitale.',
+    color: 'from-violet-500 to-indigo-500',
+    shadow: 'shadow-violet-500/20',
   },
 ];
 
