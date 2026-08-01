@@ -1,59 +1,59 @@
-import { Globe, Palette, Smartphone, Zap, Search, ShieldCheck, Code2, BarChart3 } from 'lucide-react';
+import { Globe, Star, Mail, AppWindow, Layout, Cog, Video, Linkedin } from 'lucide-react';
 
 const services = [
   {
     icon: Globe,
-    title: 'Sites Vitrine',
+    title: 'Site Web',
     description: 'Des sites élégants qui captent l\'attention et convertissent vos visiteurs en clients.',
     color: 'from-blue-500 to-indigo-500',
     shadow: 'shadow-blue-500/20',
   },
   {
-    icon: Palette,
-    title: 'Design UI/UX',
-    description: 'Des interfaces intuitives et visuellement captivantes, pensées pour l\'utilisateur.',
-    color: 'from-purple-500 to-pink-500',
-    shadow: 'shadow-purple-500/20',
-  },
-  {
-    icon: Smartphone,
-    title: 'Responsive Design',
-    description: 'Des expériences parfaites sur tous les appareils : mobile, tablette et desktop.',
-    color: 'from-emerald-500 to-teal-500',
-    shadow: 'shadow-emerald-500/20',
-  },
-  {
-    icon: Zap,
-    title: 'Performance',
-    description: 'Sites ultra-rapides optimisés pour un chargement instantané et un SEO optimal.',
+    icon: Star,
+    title: 'Augmentation de vos notes Google Maps',
+    description: 'Boostez votre réputation locale et attirez plus de clients grâce à une meilleure note Google.',
     color: 'from-yellow-500 to-orange-500',
     shadow: 'shadow-yellow-500/20',
   },
   {
-    icon: Search,
-    title: 'SEO & Référencement',
-    description: 'Stratégies de référencement pour vous positionner en tête des résultats Google.',
-    color: 'from-orange-500 to-red-500',
-    shadow: 'shadow-orange-500/20',
+    icon: Mail,
+    title: 'Newsletter Automatique',
+    description: 'Des campagnes email automatisées et personnalisées pour fidéliser votre audience.',
+    color: 'from-emerald-500 to-teal-500',
+    shadow: 'shadow-emerald-500/20',
   },
   {
-    icon: ShieldCheck,
-    title: 'Maintenance & Sécurité',
-    description: 'Mises à jour régulières, sauvegardes et protection contre les menaces web.',
-    color: 'from-rose-500 to-purple-500',
-    shadow: 'shadow-rose-500/20',
+    icon: AppWindow,
+    title: 'Applications',
+    description: 'Des applications web et mobile sur mesure, pensées pour vos utilisateurs et vos objectifs.',
+    color: 'from-purple-500 to-pink-500',
+    shadow: 'shadow-purple-500/20',
   },
   {
-    icon: Code2,
-    title: 'Développement Sur Mesure',
-    description: 'Des fonctionnalités et applications web personnalisées adaptées à vos besoins métier.',
+    icon: Layout,
+    title: 'WorkFlow sur Notion',
+    description: 'Structurez et optimisez votre organisation grâce à des espaces Notion clés en main.',
     color: 'from-cyan-500 to-blue-500',
     shadow: 'shadow-cyan-500/20',
   },
   {
-    icon: BarChart3,
-    title: 'Analytics & Reporting',
-    description: 'Suivi des performances, tableaux de bord et rapports pour piloter votre croissance digitale.',
+    icon: Cog,
+    title: 'Automatisation',
+    description: 'Automatisez vos tâches répétitives et gagnez du temps grâce à des workflows intelligents.',
+    color: 'from-rose-500 to-purple-500',
+    shadow: 'shadow-rose-500/20',
+  },
+  {
+    icon: Video,
+    title: 'Montage Vidéo',
+    description: 'Des vidéos percutantes et professionnelles pour valoriser votre image de marque.',
+    color: 'from-orange-500 to-red-500',
+    shadow: 'shadow-orange-500/20',
+  },
+  {
+    icon: Linkedin,
+    title: 'Tutorat d\'un compte LinkedIn',
+    description: 'Apprenez à maîtriser LinkedIn pour développer votre réseau et votre visibilité professionnelle.',
     color: 'from-violet-500 to-indigo-500',
     shadow: 'shadow-violet-500/20',
   },
@@ -66,7 +66,7 @@ export default function Services() {
         {/* Section header */}
         <div className="text-center mb-16">
           <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 mb-4">
-            <Zap size={14} className="text-primary-500" />
+            <Cog size={14} className="text-primary-500" />
             <span className="text-xs font-medium text-gray-600 uppercase tracking-wider">Nos Services</span>
           </span>
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight">
