@@ -46,7 +46,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <div className="text-xs text-gray-400">Email</div>
-                  <div className="text-sm font-medium text-gray-700">contact@pixelcraft.studio</div>
+                  <div className="text-sm font-medium text-gray-700">dayann@pixelcraft.email</div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -55,7 +55,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <div className="text-xs text-gray-400">Téléphone</div>
-                  <div className="text-sm font-medium text-gray-700">+33 1 23 45 67 89</div>
+                  <div className="text-sm font-medium text-gray-700">+33 06 02 47 77 68</div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
