@@ -116,7 +116,7 @@ export default function PrivacyPolicy() {
               <li><strong>Droit d'opposition :</strong> vous opposer au traitement de vos données.</li>
             </ul>
             <p>
-              Pour exercer ces droits, contactez-nous à : <strong>contact@pixelcraft.studio</strong>
+              Pour exercer ces droits, contactez-nous à : <strong>dayann@pixelcraft.email</strong>
             </p>
           </Section>
 
@@ -135,7 +135,7 @@ export default function PrivacyPolicy() {
               Pour toute question relative à cette politique de confidentialité, vous pouvez nous contacter :
             </p>
             <ul>
-              <li><strong>Email :</strong> contact@pixelcraft.studio</li>
+              <li><strong>Email :</strong> dayann@pixelcraft.email</li>
               <li><strong>Site :</strong> <a href="https://pixelcraft-bay.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-primary-500 underline underline-offset-4 hover:text-primary-600">pixelcraft-bay.vercel.app</a></li>
             </ul>
           </Section>
