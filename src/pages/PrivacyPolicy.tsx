@@ -130,7 +130,7 @@ export default function PrivacyPolicy() {
           <div id="mentions" className="pt-8 border-t border-gray-200">
           </Section>
 
-          <Section title="11. Contact">
+          <Section title="9. Contact">
             <p>
               Pour toute question relative à cette politique de confidentialité, vous pouvez nous contacter :
             </p>
