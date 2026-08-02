@@ -21,7 +21,7 @@ const projects = [
     title: 'CarroExpert',
     subtitle: 'Pièces de Carrosserie Automobile',
     description: 'Plateforme moderne pour un spécialiste en pièces auto. Interface dynamique avec catalogue produit.',
-    url: 'https://architect-puce-five.vercel.app/',
+    url: 'https://carro-expert-five.vercel.app/',
     tags: ['E-Commerce', 'Automobile', 'Catalogue'],
     gradient: 'from-orange-500 to-orange-700',
   },
