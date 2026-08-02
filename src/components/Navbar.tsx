@@ -1,40 +1,58 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { label: 'Accueil', href: '/#accueil' },
-  { label: 'Services', href: '/#services' },
-  { label: 'Portfolio', href: '/#portfolio' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Accueil', href: 'accueil' },
+  { label: 'Services', href: 'services' },
+  { label: 'Portfolio', href: 'portfolio' },
+  { label: 'Contact', href: 'contact' },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (sectionId) => {
     setOpen(false);
-    if (location.pathname !== '/') {
-      // Navigate to home first, then scroll
-      window.location.href = href;
+
+    // Si on est déjà sur la home, on scroll directement
+    if (location.pathname === '/') {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
       return;
     }
-    const id = href.replace('/#', '');
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+
+    // Sinon on va sur la home, puis on scroll après le chargement
+    navigate('/');
+    setTimeout(() => {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
+
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-purple-500 shadow-lg shadow-primary-500/30">
-              <svg className="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                className="h-5 w-5 text-white"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <rect x="3" y="3" width="7" height="7" />
                 <rect x="14" y="3" width="7" height="7" />
                 <rect x="3" y="14" width="7" height="7" />
@@ -58,7 +76,7 @@ export default function Navbar() {
               </button>
             ))}
             <button
-              onClick={() => handleNavClick('/#contact')}
+              onClick={() => handleNavClick('contact')}
               className="rounded-full bg-gradient-to-r from-primary-600 to-purple-500 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-primary-500/30 transition-all hover:shadow-primary-500/50 hover:-translate-y-0.5"
             >
               Démarrer un projet
@@ -88,7 +106,7 @@ export default function Navbar() {
             </button>
           ))}
           <button
-            onClick={() => handleNavClick('/#contact')}
+            onClick={() => handleNavClick('contact')}
             className="w-full rounded-full bg-gradient-to-r from-primary-600 to-purple-500 px-5 py-2.5 text-sm font-semibold text-white text-center"
           >
             Démarrer un projet
