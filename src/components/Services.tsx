@@ -52,7 +52,7 @@ const services = [
   },
   {
     icon: User,
-    title: 'Tutorat d\'un compte LinkedIn/Facebook/instagram',
+    title: 'Tutorat d\'un compte LinkedIn',
     description: 'Apprenez à maîtriser LinkedIn pour développer votre réseau et votre visibilité professionnelle.',
     color: 'from-violet-500 to-indigo-500',
     shadow: 'shadow-violet-500/20',
