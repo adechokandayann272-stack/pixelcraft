@@ -1,18 +1,20 @@
 @import "tailwindcss";
 
 @theme {
+  /* Couleurs saturées et magnétiques */
   --color-primary-50: #eef2ff;
   --color-primary-100: #e0e7ff;
   --color-primary-200: #c7d2fe;
   --color-primary-300: #a5b4fc;
   --color-primary-400: #818cf8;
-  --color-primary-500: #6366f1;
-  --color-primary-600: #4f46e5;
-  --color-primary-700: #4338ca;
-  --color-primary-800: #3730a3;
-  --color-primary-900: #312e81;
+  --color-primary-500: #4f46e5; /* Indigo plus profond */
+  --color-primary-600: #3f39cc;
+  --color-primary-700: #312bb2;
+  --color-primary-800: #252099;
+  --color-primary-900: #1a177a;
 
-  --color-accent-400: #34d399;
+  /* Accents Néon */
+  --color-accent-400: #00f5a0; /* Vert menthe ultra-lumineux */
   --color-accent-500: #10b981;
   --color-accent-600: #059669;
 }
@@ -23,154 +25,178 @@ html {
 
 body {
   font-family: 'DM Sans', sans-serif;
-  font-weight: 500; /* Texte de base plus gras */
+  font-weight: 550; /* Texte de base semi-gras, très lisible */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-/* Titres plus imposants et contrastés */
+/* Titres ultra-massifs et premium */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 850; /* Style "Heavy" très moderne */
+  letter-spacing: -0.03em; /* Resserrement premium */
+  line-height: 1.1;
 }
 
 strong, b {
-  font-weight: 700;
+  font-weight: 800;
 }
 
-/* --- KEYFRAMES FLUIDES (GPU Accelerated) --- */
+/* --- KEYFRAMES ULTRA-FLUIDES (Avec accélération GPU, Flous et Rotations) --- */
 
-@keyframes float {
+@keyframes float-premium {
   0%, 100% {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) rotate(0deg);
   }
   50% {
-    transform: translate3d(0, -16px, 0);
+    transform: translate3d(0, -18px, 0) rotate(1.5deg);
   }
 }
 
-@keyframes float-delayed {
+@keyframes float-delayed-premium {
   0%, 100% {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) rotate(0deg);
   }
   50% {
-    transform: translate3d(0, -12px, 0);
+    transform: translate3d(0, -12px, 0) rotate(-1deg);
   }
 }
 
-@keyframes pulse-glow {
+@keyframes pulse-glow-premium {
   0%, 100% {
-    opacity: 0.35;
+    transform: scale3d(1, 1, 1);
+    filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.4)) drop-shadow(0 0 2px rgba(99, 102, 241, 0.2));
+  }
+  50% {
+    transform: scale3d(1.03, 1.03, 1);
+    filter: drop-shadow(0 0 35px rgba(139, 92, 246, 0.75)) drop-shadow(0 0 10px rgba(139, 92, 246, 0.4));
+  }
+}
+
+@keyframes slide-up-premium {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 45px, 0) scale3d(0.97, 0.97, 1);
+    filter: blur(10px); /* Transition de flou haut de gamme */
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+    filter: blur(0);
+  }
+}
+
+@keyframes fade-in-premium {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes spring-pop {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.7, 0.7, 1);
+  }
+  70% {
+    transform: scale3d(1.05, 1.05, 1);
+  }
+  100% {
+    opacity: 1;
     transform: scale3d(1, 1, 1);
   }
-  50% {
-    opacity: 0.85;
-    transform: scale3d(1.04, 1.04, 1);
-  }
 }
 
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 32px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+/* Animation de défilement de dégradé */
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateZ(0);
-  }
-  to {
-    opacity: 1;
-    transform: translateZ(0);
-  }
-}
 
-@keyframes count-up {
-  from {
-    opacity: 0;
-    transform: scale3d(0.85, 0.85, 1);
-  }
-  to {
-    opacity: 1;
-    transform: scale3d(1, 1, 1);
-  }
-}
-
-/* --- CLASSES D'ANIMATION AVEC COURBES BEZIER HAUTE PERFORMANCE --- */
+/* --- CLASSES D'ANIMATIONS PHYSIQUES --- */
 
 .animate-float {
-  animation: float 6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  animation: float-premium 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   will-change: transform;
 }
 
 .animate-float-delayed {
-  animation: float-delayed 8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  animation: float-delayed-premium 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   will-change: transform;
 }
 
 .animate-pulse-glow {
-  animation: pulse-glow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  will-change: opacity, transform;
+  animation: pulse-glow-premium 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform, filter;
 }
 
 .animate-slide-up {
-  animation: slide-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform, opacity;
+  animation: slide-up-premium 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity, filter;
 }
 
 .animate-fade-in {
-  animation: fade-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: opacity;
+  animation: fade-in-premium 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, filter;
 }
 
 .animate-count-up {
-  /* Effet légèrement élastique/pop */
-  animation: count-up 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation: spring-pop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   will-change: transform, opacity;
 }
 
-/* --- EFFETS DE FOND & TEXTES --- */
+
+/* --- EFFETS DE TEXTES & GLASSMORPHISM IMPRESSIONNANTS --- */
 
 .glass {
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
 }
 
 .glass-dark {
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  background: rgba(10, 10, 15, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
+/* Dégradés holographiques ultra-saturés */
 .text-gradient {
-  font-weight: 800; /* Renforce la visibilité du dégradé */
-  background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+  font-weight: 900;
+  background: linear-gradient(135deg, #4f46e5 0%, #a855f7 40%, #ff007a 100%);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: gradient-move 8s ease infinite;
 }
 
 .text-gradient-accent {
-  font-weight: 800;
-  background: linear-gradient(135deg, #34d399, #6366f1);
+  font-weight: 900;
+  background: linear-gradient(135deg, #00f5a0 0%, #00d2ff 50%, #4f46e5 100%);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: gradient-move 8s ease infinite;
 }
 
+/* Arrière-plan "Mesh Cosmic" beaucoup plus visible et contrasté */
 .bg-mesh {
-  background-color: #ffffff;
+  background-color: #0b0b0f; /* Un fond sombre fait ressortir les couleurs de manière incroyable */
   background-image:
-    radial-gradient(at 20% 20%, rgba(99, 102, 241, 0.07) 0, transparent 50%),
-    radial-gradient(at 80% 80%, rgba(139, 92, 246, 0.05) 0, transparent 50%),
-    radial-gradient(rgba(52, 211, 153, 0.03) 0, transparent 50%);
+    radial-gradient(at 10% 10%, rgba(79, 70, 229, 0.22) 0, transparent 55%),
+    radial-gradient(at 90% 90%, rgba(168, 85, 247, 0.18) 0, transparent 55%),
+    radial-gradient(at 50% 50%, rgba(0, 245, 160, 0.08) 0, transparent 45%);
+  background-size: 100% 100%;
 }
