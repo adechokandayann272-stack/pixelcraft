@@ -33,45 +33,71 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #ffffff;
-  color: #0a0a0c;
+  color: #000000;
   text-rendering: optimizeLegibility;
 }
 
-/* Surlignage du texte propre et élégant */
+/* Surlignage noir mat */
 ::selection {
-  background-color: #0a0a0c;
+  background-color: #000000;
   color: #ffffff;
 }
 
-/* Tous les titres standards (H1, H2, H3, cartes...) : Cabinet Grotesk Ultra-Gras 900 */
+/* ==========================================================================
+   TYPOGRAPHIE ARCHITECTURALE & DROITE (STYLE ATELIER)
+   ========================================================================== */
+
+/* Tous les titres : Droits, massifs, majuscules et ultra-alignés */
 h1, h2, h3, h4, h5, h6, .font-heading, .card-title {
   font-family: var(--font-heading);
   text-transform: uppercase;
   font-weight: 900;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
+  letter-spacing: -0.035em;
+  line-height: 0.9;
 }
 
-/* GROS titre Hero principal (Style Encre Noire ultra-massif) */
+/* GROS titre principal (Hero) : Ultra-droit et empilé comme sur la photo */
 .hero-title {
   font-family: var(--font-heading);
   text-transform: uppercase;
   font-weight: 900;
-  letter-spacing: -0.04em;
-  line-height: 0.85;
-  color: #0a0a0c;
+  letter-spacing: -0.045em;
+  line-height: 0.82;
+  color: #000000;
 }
 
-/* Style pour les sous-titres/badges espacés */
-.sub-heading {
+/* Sous-titres, Badges & Menus : Très espacés et fins (ex: ARCHITECTURE & DESIGN) */
+.sub-heading, .nav-link {
   font-family: var(--font-heading);
   text-transform: uppercase;
-  letter-spacing: 0.25em;
-  font-size: 0.75rem;
-  font-weight: 800;
+  letter-spacing: 0.3em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #737373;
 }
 
-/* Animations */
+/* Bouton rectangle noir droit (comme 'DÉCOUVRIR NOS PROJETS →') */
+.btn-architect {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 1rem 1.75rem;
+  border-radius: 0px; /* Bords droits architecturaux */
+  transition: all 0.2s ease;
+}
+
+.btn-architect:hover {
+  background-color: #1a1a1a;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   ANIMATIONS & EFFETS
+   ========================================================================== */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-20px); }
@@ -97,11 +123,6 @@ h1, h2, h3, h4, h5, h6, .font-heading, .card-title {
   to { opacity: 1; }
 }
 
-@keyframes count-up {
-  from { opacity: 0; transform: scale(0.5); }
-  to { opacity: 1; transform: scale(1); }
-}
-
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -122,24 +143,19 @@ h1, h2, h3, h4, h5, h6, .font-heading, .card-title {
   animation: fade-in 1s ease-out forwards;
 }
 
-.animate-count-up {
-  animation: count-up 0.6s ease-out forwards;
-}
-
-/* Effets Glassmorphism & Mesh */
+/* Glassmorphism épuré & structuré */
 .glass {
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(0, 0, 0, 0.07);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .glass-dark {
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .text-gradient {
@@ -159,7 +175,6 @@ h1, h2, h3, h4, h5, h6, .font-heading, .card-title {
 .bg-mesh {
   background-color: #ffffff;
   background-image:
-    radial-gradient(at 20% 20%, rgba(99, 102, 241, 0.06) 0, transparent 50%),
-    radial-gradient(at 80% 80%, rgba(139, 92, 246, 0.04) 0, transparent 50%),
-    radial-gradient(rgba(52, 211, 153, 0.03) 0, transparent 50%);
+    radial-gradient(at 20% 20%, rgba(99, 102, 241, 0.05) 0, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(139, 92, 246, 0.04) 0, transparent 50%);
 }
