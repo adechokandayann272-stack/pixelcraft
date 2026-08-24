@@ -1,118 +1,159 @@
-import { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-
-const navLinks = [
-  { label: 'Accueil', href: 'accueil' },
-  { label: 'Services', href: 'services' },
-  { label: 'Portfolio', href: 'portfolio' },
-  { label: 'Contact', href: 'contact' },
-];
+import React, { useState } from 'react';
+import { Menu, X, Github, ArrowRight, Sparkles } from 'lucide-react';
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const handleNavClick = (sectionId) => {
-    setOpen(false);
-
-    // Si on est déjà sur la home, on scroll directement
-    if (location.pathname === '/') {
-      const el = document.getElementById(sectionId);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
-      return;
-    }
-
-    // Sinon on va sur la home, puis on scroll après le chargement
-    navigate('/');
-    setTimeout(() => {
-      const el = document.getElementById(sectionId);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
-  };
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-purple-500 shadow-lg shadow-primary-500/30">
-              <svg
-                className="h-5 w-5 text-white"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2.5}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <rect x="3" y="3" width="7" height="7" />
-                <rect x="14" y="3" width="7" height="7" />
-                <rect x="3" y="14" width="7" height="7" />
-                <rect x="14" y="14" width="7" height="7" />
-              </svg>
-            </div>
-            <span className="text-lg font-bold text-gray-900">
-              Pixel<span className="text-gradient">Craft</span>
-            </span>
-          </Link>
-
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <button
-                key={link.label}
-                onClick={() => handleNavClick(link.href)}
-                className="relative text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-primary-500 after:transition-all hover:after:w-full"
-              >
-                {link.label}
-              </button>
-            ))}
-            <button
-              onClick={() => handleNavClick('contact')}
-              className="rounded-full bg-gradient-to-r from-primary-600 to-purple-500 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-primary-500/30 transition-all hover:shadow-primary-500/50 hover:-translate-y-0.5"
-            >
-              Démarrer un projet
-            </button>
+    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 antialiased">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        
+        {/* ==================== LOGO PIXELCRAFT ==================== */}
+        <a href="/" className="flex items-center gap-3.5 group transition-opacity hover:opacity-90">
+          {/* SVG reproduisant fidèlement l'icône à 4 ovales de votre logo */}
+          <div className="w-9 h-9 flex-shrink-0 text-[#9B82F6]">
+            <svg viewBox="0 0 100 100" className="w-full h-full" fill="currentColor">
+              <rect x="8" y="8" width="38" height="38" rx="19" />
+              <rect x="54" y="8" width="38" height="38" rx="19" />
+              <rect x="8" y="54" width="38" height="38" rx="19" />
+              <rect x="54" y="54" width="38" height="38" rx="19" />
+            </svg>
           </div>
 
-          {/* Mobile toggle */}
-          <button
-            className="md:hidden p-2 text-gray-600"
-            onClick={() => setOpen(!open)}
+          {/* Alternative si vous utilisez directement le fichier image de votre logo :
+          <img src="/pixelcraft-logo.png" alt="Pixelcraft Logo" className="h-9 w-auto object-contain" /> 
+          */}
+
+          {/* Typographie du logo Pixelcraft */}
+          <div className="flex flex-col justify-center leading-none tracking-tight font-black text-[#8B5CF6] text-lg font-sans">
+            <span className="tracking-wider">PIXEL</span>
+            <span className="tracking-wider mt-0.5">CRAFT</span>
+          </div>
+        </a>
+
+        {/* ==================== NAVIGATION DESKTOP ==================== */}
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+          <a 
+            href="#services" 
+            className="text-slate-900 font-semibold hover:text-[#8B5CF6] transition-colors"
           >
-            {open ? <X size={24} /> : <Menu size={24} />}
+            Services
+          </a>
+          <a 
+            href="#features" 
+            className="hover:text-[#8B5CF6] transition-colors"
+          >
+            Fonctionnalités
+          </a>
+          <a 
+            href="#templates" 
+            className="hover:text-[#8B5CF6] transition-colors"
+          >
+            Templates
+          </a>
+          <a 
+            href="#pricing" 
+            className="hover:text-[#8B5CF6] transition-colors"
+          >
+            Tarifs
+          </a>
+          <a 
+            href="https://github.com/adechokandayann272-stack/pixelcraft" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 hover:text-[#8B5CF6] transition-colors"
+          >
+            <Github className="w-4 h-4" />
+            <span>GitHub</span>
+          </a>
+        </nav>
+
+        {/* ==================== BOUTONS D'ACTION (CTA) ==================== */}
+        <div className="hidden md:flex items-center gap-4">
+          <a
+            href="https://www.pixelcraft.email"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-[#8B5CF6] hover:bg-[#7C3AED] rounded-xl transition-all duration-200 shadow-sm shadow-purple-200 hover:shadow-md hover:shadow-purple-300"
+          >
+            <span>Ouvrir l'éditeur</span>
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+
+        {/* ==================== BOUTON MENU MOBILE ==================== */}
+        <div className="flex md:hidden items-center">
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 text-slate-600 hover:text-slate-900 focus:outline-none"
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6 text-slate-800" />
+            ) : (
+              <Menu className="w-6 h-6 text-slate-800" />
+            )}
           </button>
         </div>
+
       </div>
 
-      {/* Mobile menu */}
-      {open && (
-        <div className="md:hidden glass border-t border-gray-200/50 px-4 py-4 space-y-3">
-          {navLinks.map((link) => (
-            <button
-              key={link.label}
-              onClick={() => handleNavClick(link.href)}
-              className="block w-full text-left text-sm font-medium text-gray-700 hover:text-primary-600 py-2"
+      {/* ==================== DROPDOWN MENU MOBILE ==================== */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white border-b border-slate-100 px-6 py-6 space-y-4 shadow-lg animate-in slide-in-from-top-2">
+          <nav className="flex flex-col space-y-4 text-base font-medium text-slate-700">
+            <a 
+              href="#services" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="hover:text-[#8B5CF6] transition-colors"
             >
-              {link.label}
-            </button>
-          ))}
-          <button
-            onClick={() => handleNavClick('contact')}
-            className="w-full rounded-full bg-gradient-to-r from-primary-600 to-purple-500 px-5 py-2.5 text-sm font-semibold text-white text-center"
-          >
-            Démarrer un projet
-          </button>
+              Services
+            </a>
+            <a 
+              href="#features" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="hover:text-[#8B5CF6] transition-colors"
+            >
+              Fonctionnalités
+            </a>
+            <a 
+              href="#templates" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="hover:text-[#8B5CF6] transition-colors"
+            >
+              Templates
+            </a>
+            <a 
+              href="#pricing" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="hover:text-[#8B5CF6] transition-colors"
+            >
+              Tarifs
+            </a>
+            <a 
+              href="https://github.com/adechokandayann272-stack/pixelcraft" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-[#8B5CF6] transition-colors"
+            >
+              <Github className="w-4 h-4" />
+              <span>GitHub</span>
+            </a>
+          </nav>
+          
+          <div className="pt-4 border-t border-slate-100">
+            <a
+              href="https://www.pixelcraft.email"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-white bg-[#8B5CF6] rounded-xl shadow-sm"
+            >
+              <span>Ouvrir l'éditeur</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 }
