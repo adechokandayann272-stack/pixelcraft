@@ -1,15 +1,15 @@
-/* Import des polices du style Architectural / Minimaliste Suisse :
-   - Space Grotesk : Titres massifs, géométriques et brutalistes
-   - Inter : Texte ultra-épuré et neutre
+/* Import des polices EXACTES pour le style Atelier / Architecture :
+   - Cabinet Grotesk (Fontshare) : Titres ultra-massifs (900 Black)
+   - Plus Jakarta Sans (Google Fonts) : Corps de texte ultra-net
 */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@600;700;800;900&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
 
 @import "tailwindcss";
 
 @theme {
-  /* Polices du thème */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Cabinet Grotesk', system-ui, -apple-system, sans-serif;
 
   --color-primary-50: #eef2ff;
   --color-primary-100: #e0e7ff;
@@ -36,25 +36,26 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #ffffff;
-  color: #0a0a0a;
+  color: #000000;
 }
 
-/* Style des gros titres façon "Atelier / Encre Noire" */
+/* Style de base pour tous les titres */
 h1, h2, h3, h4, h5, h6, .font-heading {
   font-family: var(--font-heading);
   text-transform: uppercase;
-  letter-spacing: -0.03em;
-  font-weight: 800;
-  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.88;
 }
 
-/* Style pour les sous-titres / badges très espacés (comme 'ARCHITECTURE & DESIGN') */
-.sub-heading, .nav-link {
+/* Classe spécifique pour le GROS titre principal façon "Encre Noire" */
+.hero-title {
   font-family: var(--font-heading);
   text-transform: uppercase;
-  letter-spacing: 0.25em;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+  color: #000000;
 }
 
 @keyframes float {
@@ -113,7 +114,7 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 
 .glass {
   backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
@@ -140,7 +141,7 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 .bg-mesh {
   background-color: #ffffff;
   background-image:
-    radial-gradient(at 20% 20%, rgba(99, 102, 241, 0.07) 0, transparent 80%),
-    radial-gradient(at 80% 80%, rgba(139, 92, 246, 0.05) 0, transparent 80%),
-    radial-gradient(rgba(52, 211, 153, 0.03) 0, transparent 80%);
+    radial-gradient(at 20% 20%, rgba(99, 102, 241, 0.07) 0, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(139, 92, 246, 0.05) 0, transparent 50%),
+    radial-gradient(rgba(52, 211, 153, 0.03) 0, transparent 50%);
 }
