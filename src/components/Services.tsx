@@ -1,142 +1,98 @@
-import React from 'react';
+import { Globe, Star, Mail, Smartphone, Layers, Zap, Video, User } from 'lucide-react';
 
-export default function ServicesSection() {
+const services = [
+  {
+    icon: Globe,
+    title: 'Site Web',
+    description: 'Des sites élégants qui captent l\'attention et convertissent vos visiteurs en clients.',
+    color: 'from-blue-500 to-indigo-500',
+    shadow: 'shadow-blue-500/20',
+  },
+  {
+    icon: Star,
+    title: 'Augmentation de vos notes Google Maps',
+    description: 'Boostez votre réputation locale et attirez plus de clients grâce à une meilleure note Google.',
+    color: 'from-yellow-500 to-orange-500',
+    shadow: 'shadow-yellow-500/20',
+  },
+  {
+    icon: Mail,
+    title: 'Newsletter Automatique',
+    description: 'Des campagnes email automatisées et personnalisées pour fidéliser votre audience.',
+    color: 'from-emerald-500 to-teal-500',
+    shadow: 'shadow-emerald-500/20',
+  },
+  {
+    icon: Smartphone,
+    title: 'Applications',
+    description: 'Des applications web et mobile sur mesure, pensées pour vos utilisateurs et vos objectifs.',
+    color: 'from-purple-500 to-pink-500',
+    shadow: 'shadow-purple-500/20',
+  },
+  {
+    icon: Layers,
+    title: 'WorkFlow sur Notion',
+    description: 'Structurez et optimisez votre organisation grâce à des espaces Notion clés en main.',
+    color: 'from-cyan-500 to-blue-500',
+    shadow: 'shadow-cyan-500/20',
+  },
+  {
+    icon: Zap,
+    title: 'Automatisation',
+    description: 'Automatisez vos tâches répétitives et gagnez du temps grâce à des workflows intelligents.',
+    color: 'from-rose-500 to-purple-500',
+    shadow: 'shadow-rose-500/20',
+  },
+  {
+    icon: Video,
+    title: 'Montage Vidéo',
+    description: 'Des vidéos percutantes et professionnelles pour valoriser votre image de marque.',
+    color: 'from-orange-500 to-red-500',
+    shadow: 'shadow-orange-500/20',
+  },
+  {
+    icon: User,
+    title: 'Tutorat d\'un compte LinkedIn',
+    description: 'Apprenez à maîtriser LinkedIn pour développer votre réseau et votre visibilité professionnelle.',
+    color: 'from-violet-500 to-indigo-500',
+    shadow: 'shadow-violet-500/20',
+  },
+];
+
+export default function Services() {
   return (
-    <section id="services" className="py-24 bg-white text-slate-800 antialiased">
-      <div className="max-w-7xl mx-auto px-6">
-        
-        {/* EN-TÊTE DE SECTION MINIMALISTE */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 border-b border-slate-100 pb-10">
-          <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#8B5CF6] mb-3">
-              Nos Services
-            </p>
-            <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-slate-900 leading-tight">
-              {"Une infrastructure complète pour vos e-mails transactionnels & newsletters."}
-            </h2>
-          </div>
-          <p className="text-slate-500 text-base max-w-md font-normal leading-relaxed">
-            {"Nous éliminons la complexité du code e-mail pour vous concentrer sur ce qui compte : votre message et vos conversions."}
+    <section id="services" className="py-24 bg-mesh relative">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Section header */}
+        <div className="text-center mb-16">
+          <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 mb-4">
+            <Zap size={14} className="text-primary-500" />
+            <span className="text-xs font-medium text-gray-600 uppercase tracking-wider">Nos Services</span>
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight">
+            Des solutions <span className="text-gradient">sur mesure</span>
+          </h2>
+          <p className="mt-4 text-gray-500 max-w-2xl mx-auto">
+            Nous offrons une gamme complète de services pour transformer votre vision digitale en réalité.
           </p>
         </div>
 
-        {/* GRILLE DE SERVICES */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          
-          {/* Service 1 */}
-          <div className="group relative p-8 md:p-10 rounded-2xl bg-slate-50/50 border border-slate-200/70 hover:bg-white hover:border-purple-300 hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-300 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-8">
-                <div className="w-12 h-12 rounded-xl bg-purple-50 border border-purple-100/50 text-[#8B5CF6] flex items-center justify-center group-hover:bg-[#8B5CF6] group-hover:text-white transition-colors duration-300">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-                  </svg>
-                </div>
-                <span className="text-xs font-medium text-slate-400 bg-white px-3 py-1 rounded-full border border-slate-100">
-                  HTML / MJML
-                </span>
+        {/* Services grid */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {services.map((service, i) => (
+            <div
+              key={service.title}
+              className="group relative rounded-2xl glass p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-black/5"
+              style={{ animationDelay: `${i * 0.1}s` }}
+            >
+              <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${service.color} shadow-lg ${service.shadow} mb-5 transition-transform duration-300 group-hover:scale-110`}>
+                <service.icon size={22} className="text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-3 tracking-tight">
-                Design & Intégration HTML Email
-              </h3>
-              <p className="text-slate-500 text-sm md:text-base leading-relaxed font-normal">
-                Conception de templates HTML responsive, ultra-légers et testés sur plus de 50 clients de messagerie (Gmail, Outlook, Apple Mail, Yahoo).
-              </p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">{service.title}</h3>
+              <p className="text-sm text-gray-500 leading-relaxed">{service.description}</p>
             </div>
-            <div className="mt-8 pt-6 border-t border-slate-200/40 flex items-center justify-between text-xs font-semibold text-slate-400 group-hover:text-[#8B5CF6] transition-colors">
-              <span>En savoir plus</span>
-              <svg className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17"/>
-              </svg>
-            </div>
-          </div>
-
-          {/* Service 2 */}
-          <div className="group relative p-8 md:p-10 rounded-2xl bg-slate-50/50 border border-slate-200/70 hover:bg-white hover:border-purple-300 hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-300 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-8">
-                <div className="w-12 h-12 rounded-xl bg-purple-50 border border-purple-100/50 text-[#8B5CF6] flex items-center justify-center group-hover:bg-[#8B5CF6] group-hover:text-white transition-colors duration-300">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                  </svg>
-                </div>
-                <span className="text-xs font-medium text-slate-400 bg-white px-3 py-1 rounded-full border border-slate-100">
-                  Intégration
-                </span>
-              </div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-3 tracking-tight">
-                Connexion ESP & API Webhooks
-              </h3>
-              <p className="text-slate-500 text-sm md:text-base leading-relaxed font-normal">
-                Intégration transparente et rapide avec vos routeurs d'envoi favoris : Resend, SendGrid, Mailchimp, Postmark ou AWS SES.
-              </p>
-            </div>
-            <div className="mt-8 pt-6 border-t border-slate-200/40 flex items-center justify-between text-xs font-semibold text-slate-400 group-hover:text-[#8B5CF6] transition-colors">
-              <span>En savoir plus</span>
-              <svg className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17"/>
-              </svg>
-            </div>
-          </div>
-
-          {/* Service 3 */}
-          <div className="group relative p-8 md:p-10 rounded-2xl bg-slate-50/50 border border-slate-200/70 hover:bg-white hover:border-purple-300 hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-300 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-8">
-                <div className="w-12 h-12 rounded-xl bg-purple-50 border border-purple-100/50 text-[#8B5CF6] flex items-center justify-center group-hover:bg-[#8B5CF6] group-hover:text-white transition-colors duration-300">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                  </svg>
-                </div>
-                <span className="text-xs font-medium text-slate-400 bg-white px-3 py-1 rounded-full border border-slate-100">
-                  Performance
-                </span>
-              </div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-3 tracking-tight">
-                Optimisation de Délivrabilité
-              </h3>
-              <p className="text-slate-500 text-sm md:text-base leading-relaxed font-normal">
-                Structure de code propre et compression des assets pour garantir un passage direct en boîte de réception principale.
-              </p>
-            </div>
-            <div className="mt-8 pt-6 border-t border-slate-200/40 flex items-center justify-between text-xs font-semibold text-slate-400 group-hover:text-[#8B5CF6] transition-colors">
-              <span>En savoir plus</span>
-              <svg className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17"/>
-              </svg>
-            </div>
-          </div>
-
-          {/* Service 4 */}
-          <div className="group relative p-8 md:p-10 rounded-2xl bg-slate-50/50 border border-slate-200/70 hover:bg-white hover:border-purple-300 hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-300 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-8">
-                <div className="w-12 h-12 rounded-xl bg-purple-50 border border-purple-100/50 text-[#8B5CF6] flex items-center justify-center group-hover:bg-[#8B5CF6] group-hover:text-white transition-colors duration-300">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                  </svg>
-                </div>
-                <span className="text-xs font-medium text-slate-400 bg-white px-3 py-1 rounded-full border border-slate-100">
-                  Fiabilité
-                </span>
-              </div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-3 tracking-tight">
-                Compatibilité Outlook & Legacy
-              </h3>
-              <p className="text-slate-500 text-sm md:text-base leading-relaxed font-normal">
-                Prise en charge native des moteurs de rendu complexes comme Microsoft Outlook sans dégrader le visuel mobile.
-              </p>
-            </div>
-            <div className="mt-8 pt-6 border-t border-slate-200/40 flex items-center justify-between text-xs font-semibold text-slate-400 group-hover:text-[#8B5CF6] transition-colors">
-              <span>En savoir plus</span>
-              <svg className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17"/>
-              </svg>
-            </div>
-          </div>
-
+          ))}
         </div>
-
       </div>
     </section>
   );
