@@ -30,11 +30,11 @@ export default function ServicesSection() {
   ];
 
   return (
-    <section id="services" className="py-28 bg-white text-slate-800 antialiased">
+    <section id="services" className="py-24 bg-white text-slate-800 antialiased">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* En-tête de section ultra-minimaliste */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8 border-b border-slate-100 pb-12">
+        {/* En-tête de section minimaliste */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 border-b border-slate-100 pb-10">
           <div className="max-w-2xl">
             <p className="text-xs font-bold uppercase tracking-widest text-[#8B5CF6] mb-3">
               Nos Services
@@ -48,7 +48,7 @@ export default function ServicesSection() {
           </p>
         </div>
 
-        {/* Grille de cartes minimalistes avec bordures fines */}
+        {/* Grille de cartes épurées */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((service, index) => {
             const Icon = service.icon;
