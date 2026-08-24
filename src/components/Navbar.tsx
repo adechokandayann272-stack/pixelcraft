@@ -41,27 +41,13 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
 
-          {/* Logo */}
+          {/* Logo image integre proprement */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary-500 to-purple-500 shadow-lg shadow-primary-500/30">
-              <svg
-                className="h-5 w-5 text-white"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2.5}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <rect x="3" y="3" width="7" height="7" />
-                <rect x="14" y="3" width="7" height="7" />
-                <rect x="3" y="14" width="7" height="7" />
-                <rect x="14" y="14" width="7" height="7" />
-              </svg>
-            </div>
-            <span className="text-lg font-bold text-gray-900">
-              Pixel<span className="text-gradient">Craft</span>
-            </span>
+            <img
+              src="/logo.png"
+              alt="PixelCraft"
+              className="h-9 w-auto object-contain mix-blend-multiply"
+            />
           </Link>
 
           {/* Desktop links */}
