@@ -49,7 +49,7 @@ export default function Navbar() {
             <img
               src={logoImg}
               alt="PixelCraft"
-              className="h-9 w-auto object-contain mix-blend-multiply"
+              className="h-14 w-auto object-contain mix-blend-multiply"
             />
           </Link>
 
