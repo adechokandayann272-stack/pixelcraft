@@ -72,14 +72,14 @@ export default function Services() {
     <section id="services" className="py-24 bg-[#F8FAFC] antialiased">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         
-        {/* En-tête de section */}
+        {/* En-tête */}
         <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100/80 text-indigo-700 text-[12px] font-bold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100/80 text-indigo-700 text-[12px] font-semibold uppercase tracking-wider mb-4">
             <Zap size={13} className="fill-indigo-600 stroke-indigo-600" />
             <span>Nos expertises</span>
           </div>
           
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-[-0.02em] leading-[1.15]">
+          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-[-0.02em] leading-[1.15]">
             Des solutions <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">sur mesure</span> pour accélérer.
           </h2>
           
@@ -101,12 +101,12 @@ export default function Services() {
                   <service.icon size={22} strokeWidth={2} />
                 </div>
                 
-                {/* Titre Ultra-Net (Zero flou / Lisibilité maximale) */}
-                <h3 className={`text-[17px] font-bold text-slate-900 tracking-[-0.015em] leading-snug mb-2.5 transition-colors duration-200 ${service.accentHover}`}>
+                {/* Titre : font-semibold (Moins gras, très raffiné & ultra-net) */}
+                <h3 className={`text-[17px] font-semibold text-slate-900 tracking-[-0.01em] leading-snug mb-2.5 transition-colors duration-200 ${service.accentHover}`}>
                   {service.title}
                 </h3>
                 
-                {/* Description fluide */}
+                {/* Description */}
                 <p className="text-[14px] font-normal text-slate-500 leading-relaxed">
                   {service.description}
                 </p>
