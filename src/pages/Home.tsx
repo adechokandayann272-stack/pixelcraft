@@ -1,7 +1,7 @@
 import Hero from '../components/Hero';
 import Services from '../components/Services';
-import Process from '../components/Portofolio'; // <-- IMPORT RAJOUTÉ
-import Portfolio from '../components/Process';
+import Portofolio from '../components/Portofolio';
+import Process from '../components/Process';
 import Contact from '../components/Contact';
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <Hero />
       <Services />
-      <Portofolio /> 
+      <Portofolio />
       <Process />
       <Contact />
     </>
