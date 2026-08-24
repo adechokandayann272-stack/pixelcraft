@@ -1,26 +1,18 @@
-Ahah, désolé, je me suis emporté dans l'espace avec le mode sombre ! 😅 
-
-On redescend sur Terre : on garde exactement **l'esprit d'origine en mode clair**, mais avec des polices bien épaisses, des animations ultra-fluides (accélération GPU) et des couleurs de dégradés qui "pop" de fou sur fond blanc.
-
-Voici la version corrigée, fidèle à ton site d'origine mais boostée :
-
-```css
 @import "tailwindcss";
 
 @theme {
-  /* Version originale mais boostée en saturation */
   --color-primary-50: #eef2ff;
   --color-primary-100: #e0e7ff;
   --color-primary-200: #c7d2fe;
   --color-primary-300: #a5b4fc;
   --color-primary-400: #818cf8;
-  --color-primary-500: #4f46e5; /* Un chouïa plus électrique */
+  --color-primary-500: #4f46e5;
   --color-primary-600: #3f39cc;
   --color-primary-700: #312bb2;
   --color-primary-800: #252099;
   --color-primary-900: #1a177a;
 
-  --color-accent-400: #00f5a0; /* Menthe néon ultra-lumineuse */
+  --color-accent-400: #00f5a0;
   --color-accent-500: #10b981;
   --color-accent-600: #059669;
 }
@@ -31,22 +23,19 @@ html {
 
 body {
   font-family: 'DM Sans', sans-serif;
-  font-weight: 550; /* Texte de base plus gras et lisible */
+  font-weight: 600;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Titres ultra-robustes et modernes */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 850; 
+  font-weight: 800;
   letter-spacing: -0.03em;
 }
 
 strong, b {
   font-weight: 800;
 }
-
-/* --- ANIMATIONS ULTRA-FLUIDES (Physiques & GPU) --- */
 
 @keyframes float {
   0%, 100% { 
@@ -81,7 +70,7 @@ strong, b {
   from { 
     opacity: 0; 
     transform: translate3d(0, 35px, 0); 
-    filter: blur(4px); /* Léger flou de mouvement ultra-premium */
+    filter: blur(4px);
   }
   to { 
     opacity: 1; 
@@ -105,7 +94,7 @@ strong, b {
     transform: scale3d(0.85, 0.85, 1); 
   }
   70% {
-    transform: scale3d(1.03, 1.03, 1); /* Petit effet de rebond */
+    transform: scale3d(1.03, 1.03, 1);
   }
   100% { 
     opacity: 1; 
@@ -113,14 +102,11 @@ strong, b {
   }
 }
 
-/* Animation subtile pour faire bouger le dégradé des textes */
 @keyframes gradient-shift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
-/* --- CLASSES D'ANIMATIONS --- */
 
 .animate-float {
   animation: float 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
@@ -152,8 +138,6 @@ strong, b {
   will-change: transform, opacity;
 }
 
-/* --- VERRE & COULEURS FLASHY SUR FOND CLAIR --- */
-
 .glass {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -168,9 +152,8 @@ strong, b {
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Dégradés magiques et très contrastés */
 .text-gradient {
-  font-weight: 900;
+  font-weight: 800;
   background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
@@ -180,7 +163,7 @@ strong, b {
 }
 
 .text-gradient-accent {
-  font-weight: 900;
+  font-weight: 800;
   background: linear-gradient(135deg, #00f5a0 0%, #3b82f6 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
@@ -189,7 +172,6 @@ strong, b {
   animation: gradient-shift 6s ease infinite;
 }
 
-/* Le fond d'origine CLAIR, mais avec des couleurs de mesh plus visibles et vibrantes */
 .bg-mesh {
   background-color: #ffffff;
   background-image:
@@ -197,4 +179,3 @@ strong, b {
     radial-gradient(at 80% 80%, rgba(124, 58, 237, 0.09) 0, transparent 60%),
     radial-gradient(at 50% 50%, rgba(0, 245, 160, 0.06) 0, transparent 50%);
 }
-```
