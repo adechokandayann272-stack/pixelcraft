@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
+// Import direct de l'image située dans src/logo.png
+import logoImg from '../logo.png';
+
 const navLinks = [
   { label: 'Accueil', href: 'accueil' },
   { label: 'Services', href: 'services' },
@@ -41,10 +44,10 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
 
-          {/* Logo image integre proprement */}
+          {/* Logo image integre par import */}
           <Link to="/" className="flex items-center gap-2">
             <img
-              src="/logo.png"
+              src={logoImg}
               alt="PixelCraft"
               className="h-9 w-auto object-contain mix-blend-multiply"
             />
