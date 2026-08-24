@@ -21,20 +21,21 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Base du site : texte fin et elegant */
+/* Texte general tres fin et elegant */
 body {
   font-family: 'DM Sans', sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #475569;
+  color: #64748b;
 }
 
-/* Paragraphes et textes explicatifs : plus petits et légers */
+/* Textes sous-titres et descriptions : petits et ultra-fins */
 p {
-  font-weight: 400 !important;
-  font-size: 0.925rem;
-  line-height: 1.6;
+  font-weight: 300 !important;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #64748b;
 }
 
 /* Grands titres d impact */
@@ -44,18 +45,18 @@ h1, h2 {
   color: #0f172a;
 }
 
-/* Titres de cartes (ex: Site Web, Avis Google Maps...) */
+/* Titres de cartes : beaucoup moins gras qu avant */
 h3, h4, h5, h6 {
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.01em;
   color: #0f172a;
 }
 
 strong, b {
-  font-weight: 700;
+  font-weight: 600;
 }
 
-/* Keyframes fluides et dynamiques */
+/* Animations */
 
 @keyframes float {
   0%, 100% { 
@@ -160,7 +161,7 @@ strong, b {
   will-change: transform, opacity;
 }
 
-/* Composants glassmorphism & degradés */
+/* Glassmorphism & Degrades */
 
 .glass {
   backdrop-filter: blur(20px);
