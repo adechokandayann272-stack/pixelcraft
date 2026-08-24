@@ -20,11 +20,9 @@ export default function Navbar() {
             </svg>
           </div>
 
-          <div className="flex flex-col justify-center leading-none font-black text-[#8B5CF6] text-lg tracking-tight font-sans">
-            <span>PIXEL</span>
-            <span className="mt-0.5">CRAFT</span>
-          </div>
-        </a>
+          <div className="flex items-center">
+  <img src="/logo.png" alt="PixelCraft Logo" className="h-10 w-auto object-contain" />
+</div>
 
         {/* NAVIGATION DESKTOP */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
