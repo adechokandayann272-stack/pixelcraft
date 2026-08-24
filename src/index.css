@@ -21,29 +21,41 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Texte de base et paragraphes normaux comme à l'origine */
+/* Base du site : texte fin et elegant */
 body {
   font-family: 'DM Sans', sans-serif;
-  font-weight: 450;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #475569;
 }
 
+/* Paragraphes et textes explicatifs : plus petits et légers */
 p {
-  font-weight: 400;
+  font-weight: 400 !important;
+  font-size: 0.925rem;
+  line-height: 1.6;
 }
 
-/* Titres imposants et bien gras */
-h1, h2, h3, h4, h5, h6 {
+/* Grands titres d impact */
+h1, h2 {
   font-weight: 850;
   letter-spacing: -0.03em;
+  color: #0f172a;
+}
+
+/* Titres de cartes (ex: Site Web, Avis Google Maps...) */
+h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #0f172a;
 }
 
 strong, b {
-  font-weight: 800;
+  font-weight: 700;
 }
 
-/* Animations fluides et impressionnantes */
+/* Keyframes fluides et dynamiques */
 
 @keyframes float {
   0%, 100% { 
@@ -148,7 +160,7 @@ strong, b {
   will-change: transform, opacity;
 }
 
-/* Styles visuels et dégradés */
+/* Composants glassmorphism & degradés */
 
 .glass {
   backdrop-filter: blur(20px);
@@ -184,7 +196,6 @@ strong, b {
   animation: gradient-shift 5s ease infinite;
 }
 
-/* Fond propre sans les deux gros cercles violacés */
 .bg-mesh {
   background-color: #ffffff;
   background-image: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
