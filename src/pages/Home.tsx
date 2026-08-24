@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <Hero />
       <Services />
-      <Process /> {/* <-- SECTION RAJOUTÉE ICI */}
+      <Process /> 
       <Portfolio />
       <Contact />
     </>
