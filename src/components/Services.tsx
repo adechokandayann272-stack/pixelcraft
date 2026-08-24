@@ -33,22 +33,22 @@ export default function ServicesSection() {
     <section id="services" className="py-24 bg-white text-slate-800 antialiased">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* En-tête de section minimaliste */}
+        {/* EN-TÊTE DE SECTION */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 border-b border-slate-100 pb-10">
           <div className="max-w-2xl">
             <p className="text-xs font-bold uppercase tracking-widest text-[#8B5CF6] mb-3">
               Nos Services
             </p>
             <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-slate-900 leading-tight">
-              Une infrastructure complète pour vos e-mails transactionnels & newsletters.
+              {"Une infrastructure complète pour vos e-mails transactionnels & newsletters."}
             </h2>
           </div>
           <p className="text-slate-500 text-base max-w-md font-normal leading-relaxed">
-            Nous éliminons la complexité du code e-mail pour vous concentrer sur ce qui compte : votre message et vos conversions.
+            {"Nous éliminons la complexité du code e-mail pour vous concentrer sur ce qui compte : votre message et vos conversions."}
           </p>
         </div>
 
-        {/* Grille de cartes épurées */}
+        {/* GRILLE DES SERVICES */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((service, index) => {
             const Icon = service.icon;
