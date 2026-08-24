@@ -1,15 +1,21 @@
-/* Import des polices EXACTES pour le style Atelier / Architecture :
-   - Cabinet Grotesk (Fontshare) : Titres ultra-massifs (800, 900 Black)
-   - Plus Jakarta Sans (Google Fonts) : Corps de texte ultra-net
-*/
+/* ==========================================================================
+   1. IMPORTS DES POLICES (Trio Typographique)
+   - Cabinet Grotesk (Fontshare) : Style Hero / Atelier (Ultra-massif 900)
+   - Outfit (Google Fonts) : Style Cartes / Titres (Gras, compact & net 800/900)
+   - Plus Jakarta Sans (Google Fonts) : Corps de texte & descriptions (Ultra-limpide)
+   ========================================================================== */
 @import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 @import "tailwindcss";
 
+/* ==========================================================================
+   2. THÈME TAILWIND V4 (Couleurs & Variables de Polices)
+   ========================================================================== */
 @theme {
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-heading: 'Cabinet Grotesk', system-ui, -apple-system, sans-serif;
+  --font-card: 'Outfit', system-ui, -apple-system, sans-serif;
 
   --color-primary-50: #eef2ff;
   --color-primary-100: #e0e7ff;
@@ -27,6 +33,9 @@
   --color-accent-600: #059669;
 }
 
+/* ==========================================================================
+   3. STYLES DE BASE & TYPOGRAPHIE
+   ========================================================================== */
 html {
   scroll-behavior: smooth;
 }
@@ -40,22 +49,22 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Surlignage du texte propre et élégant */
+/* Surlignage de texte propre */
 ::selection {
   background-color: #0a0a0c;
   color: #ffffff;
 }
 
-/* Style de base pour les titres standards (H2, H3...) */
+/* Style général pour les titres (H2, H3, H4...) */
 h1, h2, h3, h4, h5, h6, .font-heading {
-  font-family: var(--font-heading);
+  font-family: var(--font-card);
   text-transform: uppercase;
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
-/* GROS titre Hero principal (Style "Encre Noire" ultra-massif) */
+/* Style GROS Titre Hero (Architecture / Encre Noire) */
 .hero-title {
   font-family: var(--font-heading);
   text-transform: uppercase;
@@ -65,15 +74,27 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   color: #0a0a0c;
 }
 
-/* Style pour les sous-titres/badges espacés */
-.sub-heading {
-  font-family: var(--font-heading);
+/* Style Titres des Cartes (Gras, net, percutant comme ta capture) */
+.card-title {
+  font-family: var(--font-card);
   text-transform: uppercase;
-  letter-spacing: 0.25em;
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
 }
 
+/* Sous-titres / Badges épurés et espacés */
+.sub-heading {
+  font-family: var(--font-card);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   4. KEYFRAMES ANIMATIONS
+   ========================================================================== */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-20px); }
@@ -104,6 +125,9 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   to { opacity: 1; transform: scale(1); }
 }
 
+/* ==========================================================================
+   5. CLASSES D'ANIMATION
+   ========================================================================== */
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -128,19 +152,21 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   animation: count-up 0.6s ease-out forwards;
 }
 
-/* Effet Glassmorphism ajusté (plus net et haut de gamme) */
+/* ==========================================================================
+   6. EFFETS EFFET GLASS & EFFETS VISUELS
+   ========================================================================== */
 .glass {
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(0, 0, 0, 0.07);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.02);
 }
 
 .glass-dark {
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background: rgba(0, 0, 0, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
@@ -161,7 +187,7 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 .bg-mesh {
   background-color: #ffffff;
   background-image:
-    radial-gradient(at 20% 20%, rgba(99, 102, 241, 0.06) 0, transparent 50%),
-    radial-gradient(at 80% 80%, rgba(139, 92, 246, 0.04) 0, transparent 50%),
+    radial-gradient(at 20% 20%, rgba(99, 102, 241, 0.07) 0, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(139, 92, 246, 0.05) 0, transparent 50%),
     radial-gradient(rgba(52, 211, 153, 0.03) 0, transparent 50%);
 }
