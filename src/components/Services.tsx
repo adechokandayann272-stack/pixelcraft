@@ -5,94 +5,87 @@ const services = [
     icon: Globe,
     title: 'Site Web',
     description: 'Des sites élégants qui captent l\'attention et convertissent vos visiteurs en clients.',
-    color: 'from-blue-500 to-indigo-500',
-    shadow: 'shadow-blue-500/20',
   },
   {
     icon: Star,
-    title: 'Augmentation de vos notes Google Maps',
-    description: 'Boostez votre réputation locale et attirez plus de clients grâce à une meilleure note Google.',
-    color: 'from-yellow-500 to-orange-500',
-    shadow: 'shadow-yellow-500/20',
+    title: 'Avis Google Maps',
+    description: 'Boostez votre réputation locale et attirez plus de clients grâce à une meilleure note.',
   },
   {
     icon: Mail,
     title: 'Newsletter Automatique',
-    description: 'Des campagnes email automatisées et personnalisées pour fidéliser votre audience.',
-    color: 'from-emerald-500 to-teal-500',
-    shadow: 'shadow-emerald-500/20',
+    description: 'Des campagnes automatisées et personnalisées pour fidéliser durablement votre audience.',
   },
   {
     icon: Smartphone,
     title: 'Applications',
-    description: 'Des applications web et mobile sur mesure, pensées pour vos utilisateurs et vos objectifs.',
-    color: 'from-purple-500 to-pink-500',
-    shadow: 'shadow-purple-500/20',
+    description: 'Des applications web et mobile sur-mesure, pensées pour la performance.',
   },
   {
     icon: Layers,
-    title: 'WorkFlow sur Notion',
-    description: 'Structurez et optimisez votre organisation grâce à des espaces Notion clés en main.',
-    color: 'from-cyan-500 to-blue-500',
-    shadow: 'shadow-cyan-500/20',
+    title: 'WorkFlow Notion',
+    description: 'Structurez et optimisez votre organisation grâce à des espaces clés en main.',
   },
   {
     icon: Zap,
     title: 'Automatisation',
-    description: 'Automatisez vos tâches répétitives et gagnez du temps grâce à des workflows intelligents.',
-    color: 'from-rose-500 to-purple-500',
-    shadow: 'shadow-rose-500/20',
+    description: 'Automatisez vos tâches répétitives et gagnez un temps précieux au quotidien.',
   },
   {
     icon: Video,
     title: 'Montage Vidéo',
-    description: 'Des vidéos percutantes et professionnelles pour valoriser votre image de marque.',
-    color: 'from-orange-500 to-red-500',
-    shadow: 'shadow-orange-500/20',
+    description: 'Des formats percutants et rythmés pour maximiser votre image de marque.',
   },
   {
     icon: User,
-    title: 'Tutorat d\'un compte LinkedIn',
-    description: 'Apprenez à maîtriser LinkedIn pour développer votre réseau et votre visibilité professionnelle.',
-    color: 'from-violet-500 to-indigo-500',
-    shadow: 'shadow-violet-500/20',
+    title: 'Tutorat LinkedIn',
+    description: 'Maîtrisez LinkedIn pour développer votre réseau et votre visibilité professionnelle.',
   },
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 bg-mesh relative">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <div className="text-center mb-16">
-          <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 mb-4">
-            <Zap size={14} className="text-primary-500" />
-            <span className="text-xs font-medium text-gray-600 uppercase tracking-wider">Nos Services</span>
-          </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight">
-            Des solutions <span className="text-gradient">sur mesure</span>
+    <section id="services" className="py-24 bg-neutral-50/50">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        
+        {/* Header */}
+        <div className="max-w-2xl mb-16">
+          <p className="text-xs font-extrabold uppercase tracking-widest text-neutral-400 mb-3">
+            Services
+          </p>
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-neutral-950 tracking-tight leading-tight">
+            Des solutions conçues <br className="hidden sm:inline" />
+            pour performer.
           </h2>
-          <p className="mt-4 text-gray-500 max-w-2xl mx-auto">
-            Nous offrons une gamme complète de services pour transformer votre vision digitale en réalité.
+          <p className="mt-4 text-base sm:text-lg font-medium text-neutral-600 leading-relaxed">
+            Une approche ciblée et sur-mesure pour transformer vos opérations et booster votre croissance.
           </p>
         </div>
 
-        {/* Services grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service, i) => (
+        {/* Grid minimaliste */}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {services.map((service) => (
             <div
               key={service.title}
-              className="group relative rounded-2xl glass p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-black/5"
-              style={{ animationDelay: `${i * 0.1}s` }}
+              className="group relative flex flex-col justify-between p-7 rounded-2xl bg-white border border-neutral-200/70 hover:border-neutral-950 transition-all duration-200"
             >
-              <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${service.color} shadow-lg ${service.shadow} mb-5 transition-transform duration-300 group-hover:scale-110`}>
-                <service.icon size={22} className="text-white" />
+              <div>
+                <div className="mb-6 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-100 text-neutral-900 group-hover:bg-neutral-950 group-hover:text-white transition-colors duration-200">
+                  <service.icon size={20} strokeWidth={2.2} />
+                </div>
+                
+                <h3 className="text-lg font-bold text-neutral-950 tracking-tight mb-2">
+                  {service.title}
+                </h3>
+                
+                <p className="text-sm font-medium text-neutral-500 leading-relaxed">
+                  {service.description}
+                </p>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">{service.title}</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">{service.description}</p>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
