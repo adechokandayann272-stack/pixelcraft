@@ -1,98 +1,90 @@
-import { Globe, Star, Mail, Smartphone, Layers, Zap, Video, User } from 'lucide-react';
+import React from 'react';
+import { Code2, Send, Zap, ShieldCheck, ArrowUpRight } from 'lucide-react';
 
-const services = [
-  {
-    icon: Globe,
-    title: 'Site Web',
-    description: 'Des sites élégants qui captent l\'attention et convertissent vos visiteurs en clients.',
-    color: 'from-blue-500 to-indigo-500',
-    shadow: 'shadow-blue-500/20',
-  },
-  {
-    icon: Star,
-    title: 'Augmentation de vos notes Google Maps',
-    description: 'Boostez votre réputation locale et attirez plus de clients grâce à une meilleure note Google.',
-    color: 'from-yellow-500 to-orange-500',
-    shadow: 'shadow-yellow-500/20',
-  },
-  {
-    icon: Mail,
-    title: 'Newsletter Automatique',
-    description: 'Des campagnes email automatisées et personnalisées pour fidéliser votre audience.',
-    color: 'from-emerald-500 to-teal-500',
-    shadow: 'shadow-emerald-500/20',
-  },
-  {
-    icon: Smartphone,
-    title: 'Applications',
-    description: 'Des applications web et mobile sur mesure, pensées pour vos utilisateurs et vos objectifs.',
-    color: 'from-purple-500 to-pink-500',
-    shadow: 'shadow-purple-500/20',
-  },
-  {
-    icon: Layers,
-    title: 'WorkFlow sur Notion',
-    description: 'Structurez et optimisez votre organisation grâce à des espaces Notion clés en main.',
-    color: 'from-cyan-500 to-blue-500',
-    shadow: 'shadow-cyan-500/20',
-  },
-  {
-    icon: Zap,
-    title: 'Automatisation',
-    description: 'Automatisez vos tâches répétitives et gagnez du temps grâce à des workflows intelligents.',
-    color: 'from-rose-500 to-purple-500',
-    shadow: 'shadow-rose-500/20',
-  },
-  {
-    icon: Video,
-    title: 'Montage Vidéo',
-    description: 'Des vidéos percutantes et professionnelles pour valoriser votre image de marque.',
-    color: 'from-orange-500 to-red-500',
-    shadow: 'shadow-orange-500/20',
-  },
-  {
-    icon: User,
-    title: 'Tutorat d\'un compte LinkedIn',
-    description: 'Apprenez à maîtriser LinkedIn pour développer votre réseau et votre visibilité professionnelle.',
-    color: 'from-violet-500 to-indigo-500',
-    shadow: 'shadow-violet-500/20',
-  },
-];
+export default function ServicesSection() {
+  const services = [
+    {
+      icon: Code2,
+      title: "Design & Intégration HTML Email",
+      description: "Conception de templates HTML responsive, ultra-légers et testés sur plus de 50 clients de messagerie (Gmail, Outlook, Apple Mail, Yahoo).",
+      tag: "HTML / MJML"
+    },
+    {
+      icon: Send,
+      title: "Connexion ESP & API Webhooks",
+      description: "Intégration transparente et rapide avec vos routeurs d'envoi favoris : Resend, SendGrid, Mailchimp, Postmark ou AWS SES.",
+      tag: "Intégration"
+    },
+    {
+      icon: Zap,
+      title: "Optimisation de Délivrabilité",
+      description: "Structure de code propre et compression des assets pour garantir un passage direct en boîte de réception principale.",
+      tag: "Performance"
+    },
+    {
+      icon: ShieldCheck,
+      title: "Compatibilité Outlook & Legacy",
+      description: "Prise en charge native des moteurs de rendu complexes comme Microsoft Outlook sans dégrader le visuel mobile.",
+      tag: "Fiabilité"
+    }
+  ];
 
-export default function Services() {
   return (
-    <section id="services" className="py-24 bg-mesh relative">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <div className="text-center mb-16">
-          <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 mb-4">
-            <Zap size={14} className="text-primary-500" />
-            <span className="text-xs font-medium text-gray-600 uppercase tracking-wider">Nos Services</span>
-          </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight">
-            Des solutions <span className="text-gradient">sur mesure</span>
-          </h2>
-          <p className="mt-4 text-gray-500 max-w-2xl mx-auto">
-            Nous offrons une gamme complète de services pour transformer votre vision digitale en réalité.
+    <section id="services" className="py-28 bg-white text-slate-800 antialiased">
+      <div className="max-w-7xl mx-auto px-6">
+        
+        {/* En-tête de section ultra-minimaliste */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8 border-b border-slate-100 pb-12">
+          <div className="max-w-2xl">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#8B5CF6] mb-3">
+              Nos Services
+            </p>
+            <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-slate-900 leading-tight">
+              Une infrastructure complète pour vos e-mails transactionnels & newsletters.
+            </h2>
+          </div>
+          <p className="text-slate-500 text-base max-w-md font-normal leading-relaxed">
+            Nous éliminons la complexité du code e-mail pour vous concentrer sur ce qui compte : votre message et vos conversions.
           </p>
         </div>
 
-        {/* Services grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service, i) => (
-            <div
-              key={service.title}
-              className="group relative rounded-2xl glass p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-black/5"
-              style={{ animationDelay: `${i * 0.1}s` }}
-            >
-              <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${service.color} shadow-lg ${service.shadow} mb-5 transition-transform duration-300 group-hover:scale-110`}>
-                <service.icon size={22} className="text-white" />
+        {/* Grille de cartes minimalistes avec bordures fines */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            return (
+              <div
+                key={index}
+                className="group relative p-8 md:p-10 rounded-2xl bg-slate-50/50 border border-slate-200/70 hover:bg-white hover:border-purple-300 hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="w-12 h-12 rounded-xl bg-purple-50 border border-purple-100/50 text-[#8B5CF6] flex items-center justify-center group-hover:bg-[#8B5CF6] group-hover:text-white transition-colors duration-300">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <span className="text-xs font-medium text-slate-400 bg-white px-3 py-1 rounded-full border border-slate-100">
+                      {service.tag}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-semibold text-slate-900 mb-3 tracking-tight">
+                    {service.title}
+                  </h3>
+
+                  <p className="text-slate-500 text-sm md:text-base leading-relaxed font-normal">
+                    {service.description}
+                  </p>
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-slate-200/40 flex items-center justify-between text-xs font-semibold text-slate-400 group-hover:text-[#8B5CF6] transition-colors">
+                  <span>En savoir plus</span>
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </div>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">{service.title}</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">{service.description}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
+
       </div>
     </section>
   );
