@@ -25,8 +25,8 @@ const steps = [
   {
     icon: Rocket,
     step: '04',
-    title: 'Lancement & Suivi',
-    description: 'Nous mettons votre site en ligne et assurons un suivi continu pour garantir ses performances.',
+    title: 'Lancement',
+    description: 'Nous mettons votre site en ligne.',
     color: 'from-accent-500 to-teal-400',
   },
 ];
