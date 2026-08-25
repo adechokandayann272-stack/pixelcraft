@@ -129,16 +129,7 @@ export default function PrivacyPolicy() {
             <p>
               Nous mettons en œuvre des mesures de sécurité techniques et organisationnelles
               appropriées pour protéger vos données contre tout accès non autorisé, modification,
-              divulgation ou destruction. Notre site est hébergé sur{' '}
-              <a
-                href="https://vercel.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-500 underline underline-offset-4 hover:text-primary-600"
-              >
-                Vercel
-              </a>
-              , qui garantit un haut niveau de sécurité.
+              divulgation ou destruction. 
             </p>
           </Section>
 
