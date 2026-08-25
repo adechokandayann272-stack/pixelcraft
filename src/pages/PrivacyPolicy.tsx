@@ -53,7 +53,7 @@ export default function PrivacyPolicy() {
                 rel="noopener noreferrer"
                 className="text-primary-500 underline underline-offset-4 hover:text-primary-600"
               >
-                pixelcraft-bay.vercel.app
+                
               </a>
               ). La protection de vos données personnelles est une priorité pour nous. Cette politique
               de confidentialité explique quelles informations nous collectons, comment nous les
