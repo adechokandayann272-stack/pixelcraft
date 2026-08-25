@@ -46,7 +46,7 @@ export default function PrivacyPolicy() {
         <div className="prose-custom space-y-10">
           <Section title="1. Introduction">
             <p>
-              Bienvenue sur PixelCraft Studio (
+              Bienvenue sur PixelCraft Studio 
               <a
                 href="https://pixelcraft-bay.vercel.app/"
                 target="_blank"
@@ -55,7 +55,7 @@ export default function PrivacyPolicy() {
               >
                 
               </a>
-              ). La protection de vos données personnelles est une priorité pour nous. Cette politique
+              . La protection de vos données personnelles est une priorité pour nous. Cette politique
               de confidentialité explique quelles informations nous collectons, comment nous les
               utilisons et quels sont vos droits.
             </p>
