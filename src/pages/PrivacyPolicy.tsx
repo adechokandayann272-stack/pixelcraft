@@ -182,12 +182,12 @@ export default function PrivacyPolicy() {
               <li>
                 <strong>Site :</strong>{' '}
                 <a
-                  href="https://pixelcraft-bay.vercel.app/"
+                  href="https://www.pixelcraft.email/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary-500 underline underline-offset-4 hover:text-primary-600"
                 >
-                  pixelcraft-bay.vercel.app
+                  https://www.pixelcraft.email/
                 </a>
               </li>
             </ul>
