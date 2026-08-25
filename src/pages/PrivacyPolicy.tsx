@@ -177,7 +177,7 @@ export default function PrivacyPolicy() {
             </p>
             <ul>
               <li>
-                <strong>Email :</strong> dayann@pixelcraft.mail
+                <strong>Email :</strong> dayann@pixelcraft.email
               </li>
               <li>
                 <strong>Site :</strong>{' '}
