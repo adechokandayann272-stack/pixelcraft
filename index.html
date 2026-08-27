@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,9 +7,66 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400;1,9..40,500&display=swap" rel="stylesheet">
+
+    <!-- Masquer la bannière de traduction Google pour garder un design propre -->
+    <style>
+      .goog-te-banner-frame.skiptranslate, 
+      .goog-te-gadget-icon, 
+      .goog-logo-link, 
+      .goog-te-gadget, 
+      #goog-gt-tt, 
+      .goog-te-balloon-frame { 
+        display: none !important; 
+      }
+      body { 
+        top: 0px !important; 
+      }
+      .goog-text-highlight { 
+        background: none !important; 
+        box-shadow: none !important; 
+      }
+      #google_translate_element {
+        display: none !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Script React / Vite existant -->
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Système de détection et de traduction automatique en Anglais (US) -->
+    <div id="google_translate_element"></div>
+
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'fr',
+          includedLanguages: 'en,fr',
+          autoDisplay: false
+        }, 'google_translate_element');
+
+        // Détecte si le visiteur a son navigateur en anglais (ex: en-US, en-GB, en)
+        var userLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+        
+        if (userLang.startsWith('en')) {
+          var checkInterval = setInterval(function() {
+            var select = document.querySelector('.goog-te-combo');
+            if (select) {
+              select.value = 'en';
+              select.dispatchEvent(new Event('change'));
+              clearInterval(checkInterval);
+            }
+          }, 300);
+
+          // Arrête de chercher après 5 secondes si non trouvé
+          setTimeout(function() {
+            clearInterval(checkInterval);
+          }, 5000);
+        }
+      }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </body>
 </html>
