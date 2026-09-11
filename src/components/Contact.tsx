@@ -4,7 +4,7 @@ import { Send, Mail, MapPin, Phone } from 'lucide-react';
 
 // Renseigne ici ton URL publique Formspree lorsque tu l'auras créée.
 // Exemple : 'https://formspree.io/f/xxxxxxxx'
-const FORMSPREE_URL = '';
+const FORMSPREE_URL = 'https://formspree.io/f/maeykvan';
 
 const CONTACT_EMAIL = 'dayann@pixelcraft.email';
 const COOLDOWN_MS = 60_000;
