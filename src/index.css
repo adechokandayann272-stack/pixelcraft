@@ -39,20 +39,25 @@ p {
 }
 
 /* Grands titres */
-h1, h2 {
+h1,
+h2 {
   font-weight: 850;
   letter-spacing: -0.03em;
   color: #0f172a;
 }
 
 /* Titres de cartes */
-h3, h4, h5, h6 {
+h3,
+h4,
+h5,
+h6 {
   font-weight: 600;
   letter-spacing: -0.01em;
   color: #0f172a;
 }
 
-strong, b {
+strong,
+b {
   font-weight: 600;
 }
 
@@ -64,42 +69,52 @@ strong, b {
 }
 
 /* Animations d apparition fluides */
-
 @keyframes slide-up {
-  from { 
-    opacity: 0; 
-    transform: translate3d(0, 25px, 0); 
+  from {
+    opacity: 0;
+    transform: translate3d(0, 25px, 0);
   }
-  to { 
-    opacity: 1; 
-    transform: translate3d(0, 0, 0); 
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes fade-in {
-  from { 
+  from {
     opacity: 0;
   }
-  to { 
+
+  to {
     opacity: 1;
   }
 }
 
 @keyframes count-up {
-  0% { 
-    opacity: 0; 
-    transform: scale3d(0.9, 0.9, 1); 
+  0% {
+    opacity: 0;
+    transform: scale3d(0.9, 0.9, 1);
   }
-  100% { 
-    opacity: 1; 
-    transform: scale3d(1, 1, 1); 
+
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
   }
 }
 
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .animate-slide-up {
@@ -118,7 +133,6 @@ strong, b {
 }
 
 /* Glassmorphism et Degrades */
-
 .glass {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -135,7 +149,12 @@ strong, b {
 
 .text-gradient {
   font-weight: 850;
-  background: linear-gradient(135deg, #4338ca 0%, #7c3aed 50%, #f43f5e 100%);
+  background: linear-gradient(
+    135deg,
+    #4338ca 0%,
+    #7c3aed 50%,
+    #f43f5e 100%
+  );
   background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -145,7 +164,12 @@ strong, b {
 
 .text-gradient-accent {
   font-weight: 850;
-  background: linear-gradient(135deg, #059669 0%, #0284c7 50%, #4f46e5 100%);
+  background: linear-gradient(
+    135deg,
+    #059669 0%,
+    #0284c7 50%,
+    #4f46e5 100%
+  );
   background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -156,4 +180,22 @@ strong, b {
 .bg-mesh {
   background-color: #ffffff;
   background-image: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+}
+
+/* Respect de la preference de reduction des animations */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-slide-up,
+  .animate-fade-in,
+  .animate-count-up,
+  .text-gradient,
+  .text-gradient-accent {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto;
+  }
 }
