@@ -887,14 +887,12 @@ Au run 1 elle n'a jamais servi. Au run 2, le script s'en sert pour **`email_fb`*
 3. Export → colle `URL | email` dans l'onglet **`FB`** (A = URL, B = email).
 4. Menu → `FB : fusionner emails trouvés` → remplit la col F + `email_final`, puis relance l'étape 6.
 
-### 4.2 Hunter.io (top leads sans email + AVEC site pro)
+### 4.2 Hunter.io (optionnel — top leads sans email + AVEC site pro)
 1. Hunter → **Domain Search** : 1 domaine du site (jamais sur `@gmail`).
 2. Filtres : fiabilité ≥ 75, `Personal` d'abord, statut `Valid`.
-3. ⚠️ **Contrôle obligatoire** (erreurs vues dans ton fichier de juin : `.ch` suisse pour une boîte française,
-   `boulangeriepinot.fr` pour « Boulangerie Senon »…) : le domaine doit évoquer le NOM + ville FR. Sinon : jeter.
+3. ⚠️ **Contrôle obligatoire** : Hunter se trompe souvent d'entité — le domaine doit évoquer le NOM + ville FR, sinon jeter.
 4. Colle les emails retenus en **col F** (ou H si F prise par FB).
-5. Format de référence : `ÉTABLISSEMENT;EMAIL;FIABILITÉ %;STATUT;TYPE;PRÉNOM;NOM;DOMAINE;VILLE;PAYS`
-   (exemple dans `annexes/hunter-exemple.csv`). Gratuit ~25/mois, sinon ~30 €/mois.
+Gratuit ~25 recherches/mois, sinon ~30 €/mois.
 
 ### 4.3 API Gouv — prénoms dirigeants (gratuit, jamais abouti au run 1)
 1. Menu → `Gouv : enrichir prénoms` → traite un lot de ~150 → **reclique** jusqu'à la fin

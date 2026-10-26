@@ -35,8 +35,7 @@ Budget run 2 : ~750-800 emails → **~5-12 €**.
 
 ## ⚠️ Leçons du run 1
 
-- Ton final ne montre que `valid` + `missing` : soit tout est passé (suspect sur 750 emails),
-  soit les `invalid`/`catch-all` ont été **supprimés ou mis ailleurs** (voir question 3 du README).
-  En v2 : **on ne supprime plus**, on route (P1→P6) — une ligne `invalid` + tél + sans site reste un lead call à 71/100 (cas Hivelin !).
+- Au run 1, les emails n'ont **jamais été vérifiés** (confirmé) : `valid` = juste « email présent », pas « délivrable ».
+  En v2 : **on ne supprime plus**, on route (A/B/C/D/RS…) — une ligne `invalid` + tél + sans site reste un lead call à ~71/100 (cas Hivelin : 10+50+6+5).
 - Toujours vérifier sur emails **minuscules + dédupliqués** (sinon tu paies 2× : la casse `LORIS@...` du run 1).
 - Garde `VERIF_RESULT` : c'est ta preuve/traçabilité (utile si un outil conteste un rebond).

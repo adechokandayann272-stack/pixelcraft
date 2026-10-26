@@ -18,23 +18,22 @@
 4. `Code.gs` → `fusionnerEmailsFB` → remplit `email_fb` (col F) + recalcule `email_final` si vide.
    Le match se fait sur URL **normalisée** (corrige le bug `RECHERCHEV` exact du plan d'origine).
 
-## B. Hunter.io (récupéré : exemple réel de juin dans `annexes/`)
+## B. Hunter.io (optionnel)
 
 **Quand :** les TOP leads **sans email mais AVEC site pro** (pas de Hunter sans domaine ; oublie les `@gmail`).
 
 **Procédure (Hunter.io → Domain Search) :**
 1. Extraire le domaine du site (formule dans `03`), 1 domaine par recherche.
 2. Filtres : **score ≥ 75**, priorité `Personal` > `Generic`, statut `Valid`.
-3. ⚠️ **VÉRIFICATION CROISÉE OBLIGATOIRE** — erreurs constatées dans ton fichier de juin :
+3. ⚠️ **VÉRIFICATION CROISÉE OBLIGATOIRE** — erreurs typiques de Hunter à surveiller :
    - mauvais pays (ex. carrosserie française → `haas-carrosserie.ch` en Suisse !),
    - mauvais établissement (ex. `Boulangerie Senon` → `boulangeriepinot.fr`),
    - domaines exotiques (`.it`, `.ch`, `.co.id`...) pour des boîtes françaises.
    Règle : le domaine doit évoquer le NOM de l'établissement + ville/pays FR. Sinon : jeter.
 4. Hunter → Email Verifier sur les retenus → export CSV.
-5. Import : ajouter les emails en `email_fb`... non — en `emails/1` ? **Non :** crée une colonne de fusion :
-   en pratique, colle-les en col F (`email_fb` → renomme-la `email_enrichi` si tu préfères, le script
-   utilise G puis H puis F). Format d'import : voir `annexes/hunter-exemple.csv`
-   (`ÉTABLISSEMENT, EMAIL, FIABILITÉ %, STATUT, TYPE, PRÉNOM, NOM, DOMAINE, VILLE, PAYS`).
+5. Import : colle les emails retenus en col F (`email_fb` — renomme-la `email_enrichi` si tu préfères ;
+   le script utilise G puis H puis F). Vérifie chaque email (Hunter → Email Verifier) AVANT de l'importer,
+   et garde une trace (CSV `NOM, EMAIL, DOMAINE, VILLE`) pour pouvoir auditer.
 
 **Coûts Hunter (indicatifs) :** offre gratuite ~25-50 recherches/mois ; payant dès ~30 €/mois.
 Réserve Hunter aux leads note ≥ 60 sans email (quelques centaines max).

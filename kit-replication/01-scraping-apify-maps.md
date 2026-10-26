@@ -3,7 +3,7 @@
 ## Acteur à utiliser
 
 **`compass/crawler-google-places`** (ex-filiale Apify Google Maps).
-Preuve : ton fichier `dataset_crawler-google-places_2026-06-07_07-30-49-418.xlsx`.
+C'est l'acteur de référence pour ce type d'export (colonnes `emails/0`, `facebooks/0`, `url` avec `query_place_id`).
 
 ## Les 5 villes (retrouvées dans ton fichier final)
 
