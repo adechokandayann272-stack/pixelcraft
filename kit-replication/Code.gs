@@ -1,32 +1,33 @@
 /*****************************************************************
- * PIXELCRAFT — Kit réplication prospection Maps (RUN 2)
+ * PIXELCRAFT — Script unique prospection Maps (RUN 2)
  * ----------------------------------------------------------------
  * Installation : Google Sheet vierge → Extensions → Apps Script →
- * coller tout ce fichier → Enregistrer → recharger le Sheet →
- * menu "🚀 PixelCraft" apparaît.
+ * supprimer le code existant → coller TOUT ce fichier →
+ * Enregistrer (💾) → fermer → recharger le Sheet →
+ * le menu "🚀 PixelCraft" apparaît (accepte les autorisations).
  *
- * Ordre d'utilisation (voir CHECKLIST-RUN2.md) :
- *  1. creerStructureFinale (1 fois)
- *  2. importer tes exports Apify dans des onglets brut_<ville>
- *  3. assemblerBrut → extraireIdsEtNoms → nettoyerEmails
- *  4. enrichissements (FB/Hunter/Gouv) — voir 04-enrichissements.md
- *  5. exporterEmailsAVerifier → (outil externe) → importerStatuts
- *  6. appliquerStrategieEtScore → genererSegments → auditQualite
+ * Ordre d'utilisation (détail : GUIDE-COMPLET-RUN2.md) :
+ *  0. Créer la structure master (1 fois)
+ *  1. Importer tes exports Apify dans des onglets brut_<ville>
+ *  2. Assembler → Extraire ids/noms → Nettoyer emails
+ *  3. Enrichissements (FB / Hunter / Gouv)
+ *  4. Exporter emails à vérifier → (outil externe) → Importer statuts
+ *  5. Stratégie + Note → Générer les onglets → Audit qualité
  *
  * Conventions : colonnes retrouvées par NOM (insensible à la casse),
- * écritures par lots (getValues/setValues), logs dans _logs.
+ * écritures par lots (rapide), logs dans _logs, helpers en _*.
  *****************************************************************/
 
 const PC = {
-  FINAL: 'FINAL',
+  MASTER: 'master',
   LOGS: '_logs',
   STATS: '_stats',
-  A_VERIFIER: 'A_VERIFIER',
-  VERIF_RESULT: 'VERIF_RESULT',
-  FB_URLS: 'FB_URLS',
-  FB_RESULT: 'FB_RESULT',
+  A_VERIFIER: '_A_VERIFIER',
+  VERIF_RESULT: '_VERIF_RESULT',
+  FB_URLS: '_FB_URLS',
+  FB_RESULT: 'FB', // = ton onglet FB : import brut apify/facebook-pages-scraper
 
-  HEADERS_FINAL: [
+  HEADERS_MASTER: [
     'nom_entreprise', 'place_id', 'address', 'categoryName', 'city',
     'email_fb', 'emails/0', 'emails/1', 'facebook/0', 'instagrams/0',
     'email_final', 'phone', 'street', 'maps', 'website',
@@ -47,7 +48,7 @@ const PC = {
   LABEL_MISSING: '— (Pas d\'email valide)',
   LABEL_INVALID: '⛔ INVALIDE | Ne pas envoyer',
 
-  // Barème Note Lead v2 (voir 06-segmentation-scoring.md pour les preuves)
+  // Barème Note Lead v2 (preuves : GUIDE §6)
   PTS: { NOM: 60, GEN: 48, CATCHALL: 45, AUCUN: 10,
          SITE_NON: 25, SITE_NON_SANS_EMAIL: 50, SITE_OUI: 5,
          TEL_MOBILE: 15, TEL_FIXE: 6, SOCIAL: 5 },
@@ -62,16 +63,16 @@ const PC = {
 
 function onOpen() {
   SpreadsheetApp.getUi().createMenu('🚀 PixelCraft')
-    .addItem('0. Créer la structure FINAL', 'creerStructureFinale')
+    .addItem('0. Créer la structure master', 'creerStructureMaster')
     .addSeparator()
-    .addItem('1. Assembler les bruts → FINAL', 'assemblerBrut')
+    .addItem('1. Assembler les bruts → master', 'assemblerBrut')
     .addItem('2. Extraire place_id + noms', 'extraireIdsEtNoms')
     .addItem('3. Nettoyer emails + email_final', 'nettoyerEmails')
     .addSeparator()
     .addItem('4. Exporter emails à vérifier', 'exporterEmailsAVerifier')
     .addItem('5. Importer statuts vérification', 'importerStatuts')
     .addItem('6. Stratégie + Note Lead', 'appliquerStrategieEtScore')
-    .addItem('7. Générer onglets P1→P6', 'genererSegments')
+    .addItem('7. Générer les onglets (A/B/C/D/RS…)', 'genererSegments')
     .addItem('8. Audit qualité → _stats', 'auditQualite')
     .addSeparator()
     .addItem('FB : lister URLs sans email', 'normaliserUrlsFacebook')
@@ -125,7 +126,7 @@ function cleanUrlSite_(v) {
 
 function normalizeTxt_(s) {
   return String(s || '').toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    .normalize('NFD').replace(/[̀-ͯ]/g, '');
 }
 
 function toast_(msg) {
@@ -134,15 +135,15 @@ function toast_(msg) {
 
 /* ============================== 0. STRUCTURE ============================== */
 
-function creerStructureFinale() {
-  const s = getOrCreateSheet_(PC.FINAL);
+function creerStructureMaster() {
+  const s = getOrCreateSheet_(PC.MASTER);
   s.clear();
-  s.getRange(1, 1, 1, PC.HEADERS_FINAL.length).setValues([PC.HEADERS_FINAL]);
+  s.getRange(1, 1, 1, PC.HEADERS_MASTER.length).setValues([PC.HEADERS_MASTER]);
   s.setFrozenRows(1);
   // Format perso de la note : 100 → "100 / 100"
   s.getRange(2, 18, Math.max(s.getMaxRows() - 1, 1), 1).setNumberFormat('0" / 100"');
-  journal_('creerStructureFinale', 'Structure FINAL créée (' + PC.HEADERS_FINAL.length + ' colonnes).');
-  toast_('Onglet FINAL prêt ✅');
+  journal_('creerStructureMaster', 'Structure master créée (' + PC.HEADERS_MASTER.length + ' colonnes).');
+  toast_('Onglet master prêt ✅');
 }
 
 /* ============================== 1. ASSEMBLAGE ============================== */
@@ -156,8 +157,8 @@ function assemblerBrut() {
     SpreadsheetApp.getUi().alert('Aucun onglet brut_* trouvé. Importe d\'abord tes exports Apify (1 onglet brut_<ville> par ville).');
     return;
   }
-  const fin = getOrCreateSheet_(PC.FINAL);
-  if (fin.getLastRow() === 0) creerStructureFinale();
+  const fin = getOrCreateSheet_(PC.MASTER);
+  if (fin.getLastRow() === 0) creerStructureMaster();
 
   const SRC = { // alias acceptés dans les bruts
     title: ['title', 'nom_entreprise', 'nom', 'entreprise'],
@@ -189,7 +190,7 @@ function assemblerBrut() {
     const c = {};
     Object.keys(SRC).forEach(k => { c[k] = at(SRC[k]); });
     for (let r = 1; r < vals.length; r++) {
-      if (timeUp_(start)) { journal_('assemblerBrut', 'STOP anti-timeout à ' + sh.getName() + ' ligne ' + (r + 1) + ' — relance pour continuer (déjà ' + out.length + ' assemblées, non écrites).'); return; }
+      if (timeUp_(start)) { journal_('assemblerBrut', 'STOP anti-timeout — relance pour continuer.'); return; }
       const g = i => (i === -1 ? '' : String(vals[r][i] || '').trim());
       const url = g(c.url);
       let pid = g(c.placeId);
@@ -212,8 +213,8 @@ function assemblerBrut() {
   const data = out.map(o => [o.title, o.pid, o.address, o.cat, o.city, '',
     o.e0, o.e1, o.fb, o.insta, '', o.phone, o.street, o.url, o.site,
     '', '', '', '', 0, '']);
-  fin.getRange(2, 1, data.length, PC.HEADERS_FINAL.length).setValues(data);
-  journal_('assemblerBrut', lus + ' lignes lues dans ' + bruts.length + ' brut(s), ' + dups + ' doublons fusionnés, ' + out.length + ' lignes écrites dans FINAL.');
+  fin.getRange(2, 1, data.length, PC.HEADERS_MASTER.length).setValues(data);
+  journal_('assemblerBrut', lus + ' lignes lues dans ' + bruts.length + ' brut(s), ' + dups + ' doublons fusionnés, ' + out.length + ' lignes écrites dans master.');
   toast_('Assemblé : ' + out.length + ' lignes (' + dups + ' doublons fusionnés) ✅');
 }
 
@@ -224,7 +225,7 @@ function cleanNomAffichage_(brut) {
   try { s = decodeURIComponent(s.replace(/\+/g, ' ')); } catch (e) { /* déjà décodé */ }
   s = s.split(' - ')[0].split(' | ')[0].split(',')[0];
   s = s.replace(/["«»]/g, '').replace(/['’ʼ]/g, "'").replace(/\s+/g, ' ').trim();
-  // Casse de titre mot à mot (espaces + tirets), minuscules après apostrophe : D'avocat
+  // Casse de titre mot à mot, minuscules après apostrophe : D'avocat
   s = s.toLowerCase().split(' ').map(w =>
     w.split('-').map(p => (p.charAt(0).toUpperCase() + p.slice(1))).join('-')
   ).join(' ');
@@ -232,10 +233,10 @@ function cleanNomAffichage_(brut) {
 }
 
 function extraireIdsEtNoms() {
-  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.FINAL);
-  if (!s || s.getLastRow() < 2) { SpreadsheetApp.getUi().alert('FINAL vide. Lance l\'assemblage d\'abord.'); return; }
+  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.MASTER);
+  if (!s || s.getLastRow() < 2) { SpreadsheetApp.getUi().alert('master vide. Lance l\'assemblage d\'abord.'); return; }
   const n = s.getLastRow() - 1;
-  const vals = s.getRange(2, 1, n, PC.HEADERS_FINAL.length).getValues();
+  const vals = s.getRange(2, 1, n, PC.HEADERS_MASTER.length).getValues();
   let pidN = 0, nomN = 0;
   for (let i = 0; i < vals.length; i++) {
     const r = vals[i];
@@ -249,12 +250,10 @@ function extraireIdsEtNoms() {
       const m = url.match(/[?&]query=([^&]+)/);
       if (m) q = m[1];
       if (q) { r[0] = cleanNomAffichage_(q); nomN++; }
-    } else {
-      // Nettoie légèrement les noms issus de title (ne touche pas aux retouches manuelles : 1 seul passage)
-      // (volontairement conservateur : on ne re-touche pas)
     }
+    // Les noms déjà remplis (title Apify ou retouches manuelles) ne sont jamais touchés.
   }
-  s.getRange(2, 1, n, PC.HEADERS_FINAL.length).setValues(vals);
+  s.getRange(2, 1, n, PC.HEADERS_MASTER.length).setValues(vals);
   journal_('extraireIdsEtNoms', pidN + ' place_id extraits, ' + nomN + ' noms reconstruits depuis les URL.');
   toast_('IDs + noms OK ✅ (' + pidN + ' ids, ' + nomN + ' noms)');
 }
@@ -262,10 +261,10 @@ function extraireIdsEtNoms() {
 /* ============================== 3. NETTOYAGE EMAILS ============================== */
 
 function nettoyerEmails() {
-  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.FINAL);
-  if (!s || s.getLastRow() < 2) { SpreadsheetApp.getUi().alert('FINAL vide.'); return; }
+  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.MASTER);
+  if (!s || s.getLastRow() < 2) { SpreadsheetApp.getUi().alert('master vide.'); return; }
   const n = s.getLastRow() - 1;
-  const vals = s.getRange(2, 1, n, PC.HEADERS_FINAL.length).getValues();
+  const vals = s.getRange(2, 1, n, PC.HEADERS_MASTER.length).getValues();
   let autoN = 0, badN = 0, dedupN = 0;
   const grise = [];
   const plateformes = [];
@@ -291,7 +290,7 @@ function nettoyerEmails() {
     r[14] = cleanUrlSite_(siteAvant);
     if (r[14] && PC.PLATEFORMES_SITE.test(r[14])) plateformes.push('L' + line + ' ' + r[14]);
   }
-  s.getRange(2, 1, n, PC.HEADERS_FINAL.length).setValues(vals);
+  s.getRange(2, 1, n, PC.HEADERS_MASTER.length).setValues(vals);
   journal_('nettoyerEmails', 'Supprimés auto: ' + autoN + ', format invalide: ' + badN + ', doublons G/H: ' + dedupN +
     '. | À CONTRÔLER (liste grise, gardés) : ' + (grise.slice(0, 30).join(' ; ') || 'aucun') +
     (grise.length > 30 ? ' (+' + (grise.length - 30) + ' autres)' : '') +
@@ -299,13 +298,13 @@ function nettoyerEmails() {
   toast_('Nettoyage OK ✅ (' + autoN + ' poubelle, ' + badN + ' invalides, ' + grise.length + ' à contrôler → _logs)');
 }
 
-/* Variante v2 (optionnelle, désactivée par défaut) : préfère l'email NOMINATIF
-   parmi G/H/F au lieu du premier non-vide. Ex run 1 : question@ → laurent.denis@ */
+/* Variante v2 (optionnelle) : préfère l'email NOMINATIF parmi G/H/F.
+   Ex run 1 : question@ → remplacé par laurent.denis@. Relance l'étape 6 après. */
 function choisirMeilleurEmail() {
-  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.FINAL);
+  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.MASTER);
   if (!s || s.getLastRow() < 2) return;
   const n = s.getLastRow() - 1;
-  const vals = s.getRange(2, 1, n, PC.HEADERS_FINAL.length).getValues();
+  const vals = s.getRange(2, 1, n, PC.HEADERS_MASTER.length).getValues();
   let changed = 0;
   for (let i = 0; i < vals.length; i++) {
     const r = vals[i];
@@ -315,20 +314,20 @@ function choisirMeilleurEmail() {
     const best = nomi.length ? nomi[0] : cands[0];
     if (best !== r[10]) { r[10] = best; changed++; }
   }
-  s.getRange(2, 1, n, PC.HEADERS_FINAL.length).setValues(vals);
-  journal_('choisirMeilleurEmail', changed + ' email_final améliorés (préférence nominatif). Pense à relancer l\'étape 6.');
+  s.getRange(2, 1, n, PC.HEADERS_MASTER.length).setValues(vals);
+  journal_('choisirMeilleurEmail', changed + ' email_final améliorés (préférence nominatif). Pense à relancer l\'étape 6 + re-vérifier les emails changés.');
   toast_(changed + ' emails améliorés ✅ (relance l\'étape 6)');
 }
 
 /* ============================== 4-5. VÉRIFICATION ============================== */
 
 function exporterEmailsAVerifier() {
-  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.FINAL);
-  if (!s || s.getLastRow() < 2) { SpreadsheetApp.getUi().alert('FINAL vide.'); return; }
+  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.MASTER);
+  if (!s || s.getLastRow() < 2) { SpreadsheetApp.getUi().alert('master vide.'); return; }
   const n = s.getLastRow() - 1;
-  const vals = s.getRange(2, 1, n, PC.HEADERS_FINAL.length).getValues();
+  const vals = s.getRange(2, 1, n, PC.HEADERS_MASTER.length).getValues();
   const seen = {};
-  const out = [['email', 'ligne_final', 'strategie_actuelle']];
+  const out = [['email', 'ligne_master', 'strategie_actuelle']];
   for (let i = 0; i < vals.length; i++) {
     const e = cleanEmail_(vals[i][10]);
     if (e && !seen[e]) { seen[e] = 1; out.push([e, i + 2, vals[i][16] || '']); }
@@ -344,7 +343,7 @@ function normaliserStatut_(brut) {
   const t = normalizeTxt_(brut);
   if (/deliverable|valid|^ok$|delivre/.test(t)) return 'valid';
   if (/accept.?all|catch.?all|accepte/.test(t)) return 'catch-all';
-  if (/risky|risque|unknown|inconnu/.test(t)) return 'catch-all'; // v2 : risky → bucket catch-all (tester prudemment)
+  if (/risky|risque|unknown|inconnu/.test(t)) return 'catch-all'; // v2 : risky → tester prudemment
   if (/undeliverable|invalid|invalide|^ko$|bounce|inexistant/.test(t)) return 'invalid';
   return '';
 }
@@ -363,9 +362,9 @@ function importerStatuts() {
     const st = normaliserStatut_(r[1]);
     if (e && st) map[e] = st;
   });
-  const s = ss.getSheetByName(PC.FINAL);
+  const s = ss.getSheetByName(PC.MASTER);
   const n = s.getLastRow() - 1;
-  const vals = s.getRange(2, 1, n, PC.HEADERS_FINAL.length).getValues();
+  const vals = s.getRange(2, 1, n, PC.HEADERS_MASTER.length).getValues();
   const counts = {};
   const sansMatch = [];
   for (let i = 0; i < vals.length; i++) {
@@ -378,7 +377,7 @@ function importerStatuts() {
     r[15] = st;
     counts[st] = (counts[st] || 0) + 1;
   }
-  s.getRange(2, 1, n, PC.HEADERS_FINAL.length).setValues(vals);
+  s.getRange(2, 1, n, PC.HEADERS_MASTER.length).setValues(vals);
   journal_('importerStatuts', JSON.stringify(counts) + ' | Sans correspondance (échantillon) : ' + (sansMatch.join(', ') || 'aucun'));
   toast_('Statuts importés ✅ ' + JSON.stringify(counts));
 }
@@ -420,10 +419,10 @@ function calculerNote_(o) {
 }
 
 function appliquerStrategieEtScore() {
-  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.FINAL);
-  if (!s || s.getLastRow() < 2) { SpreadsheetApp.getUi().alert('FINAL vide.'); return; }
+  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.MASTER);
+  if (!s || s.getLastRow() < 2) { SpreadsheetApp.getUi().alert('master vide.'); return; }
   const n = s.getLastRow() - 1;
-  const vals = s.getRange(2, 1, n, PC.HEADERS_FINAL.length).getValues();
+  const vals = s.getRange(2, 1, n, PC.HEADERS_MASTER.length).getValues();
   for (let i = 0; i < vals.length; i++) {
     const r = vals[i];
     const email = cleanEmail_(r[10]);
@@ -434,25 +433,26 @@ function appliquerStrategieEtScore() {
     r[17] = calculerNote_({ email: email, strategie: r[16], site: String(r[14] || '').trim(),
       tel: r[11], fb: String(r[8] || '').trim(), insta: String(r[9] || '').trim(), bonus: r[19] });
   }
-  s.getRange(2, 1, n, PC.HEADERS_FINAL.length).setValues(vals);
+  s.getRange(2, 1, n, PC.HEADERS_MASTER.length).setValues(vals);
   // Tri décroissant sur la note (comme ton fichier run 1)
-  s.getRange(2, 1, n, PC.HEADERS_FINAL.length).sort({ column: 18, ascending: false });
+  s.getRange(2, 1, n, PC.HEADERS_MASTER.length).sort({ column: 18, ascending: false });
   journal_('appliquerStrategieEtScore', n + ' lignes scorées + triées (note décroissante).');
   toast_(n + ' lignes scorées ✅');
 }
 
-/* ============================== 7. SEGMENTS P1→P6 ============================== */
+/* ============================== 7. ONGLETS A/B/C/D/RS… ============================== */
 
 function genererSegments() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const F = PC.FINAL + '!';
+  const F = PC.MASTER + '!';
   const segs = [
-    ['P1_CREATION_CHAUDE', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "NOMINATIF"); ' + F + 'O2:O=""; ' + F + 'R2:R>=85)'],
-    ['P2_CREATION_TIEDE', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "GÉNÉRIQUE|CATCH-ALL"); ' + F + 'O2:O="")'],
-    ['P3_REFONTE', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "NOMINATIF|GÉNÉRIQUE|CATCH-ALL"); ' + F + 'O2:O<>"")'],
-    ['P4_COLD_CALL', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "Pas d\'email|INVALIDE"); ' + F + 'L2:L<>"")'],
-    ['P5_RS_DM', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "Pas d\'email|INVALIDE"); ' + F + 'L2:L=""; (' + F + 'I2:I<>"")+(' + F + 'J2:J<>"")>0)'],
-    ['P6_ARCHIVE', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "Pas d\'email|INVALIDE"); ' + F + 'L2:L=""; (' + F + 'I2:I="")*(' + F + 'J2:J=""))']
+    ['A', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "NOMINATIF"); ' + F + 'O2:O="")'],
+    ['B', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "NOMINATIF"); ' + F + 'O2:O<>"")'],
+    ['C', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "GÉNÉRIQUE|CATCH-ALL"); ' + F + 'O2:O="")'],
+    ['D', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "GÉNÉRIQUE|CATCH-ALL"); ' + F + 'O2:O<>"")'],
+    ['RS', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "Pas d\'email|INVALIDE"); (' + F + 'I2:I<>"")+(' + F + 'J2:J<>"")>0)'],
+    ['Sans Site', 'FILTER(' + F + 'A2:U; ' + F + 'O2:O="")'],
+    ['RS Sans Email & Site', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "Pas d\'email|INVALIDE"); ' + F + 'O2:O=""; (' + F + 'I2:I<>"")+(' + F + 'J2:J<>"")>0)']
   ];
   segs.forEach(sg => {
     const sh = getOrCreateSheet_(sg[0]);
@@ -461,17 +461,17 @@ function genererSegments() {
     sh.getRange('A2').setFormula('=SIERREUR(' + sg[1] + '; "— vide —")');
     sh.setFrozenRows(1);
   });
-  journal_('genererSegments', 'Onglets P1→P6 créés (formules FILTER dynamiques sur FINAL).');
-  toast_('Segments P1→P6 créés ✅');
+  journal_('genererSegments', 'Onglets A/B/C/D/RS/Sans Site/RS Sans Email & Site créés (FILTER dynamiques sur master).');
+  toast_('Onglets créés ✅');
 }
 
 /* ============================== 8. AUDIT ============================== */
 
 function auditQualite() {
-  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.FINAL);
-  if (!s || s.getLastRow() < 2) { SpreadsheetApp.getUi().alert('FINAL vide.'); return; }
+  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.MASTER);
+  if (!s || s.getLastRow() < 2) { SpreadsheetApp.getUi().alert('master vide.'); return; }
   const n = s.getLastRow() - 1;
-  const vals = s.getRange(2, 1, n, PC.HEADERS_FINAL.length).getValues();
+  const vals = s.getRange(2, 1, n, PC.HEADERS_MASTER.length).getValues();
   const c = { total: n, email: 0, site: 0, tel: 0, mobile: 0, fb: 0, insta: 0, prenom: 0 };
   const statuts = {}, strats = {}, villes = {}, cats = {};
   let sommeNotes = 0, nbNotes = 0;
@@ -521,12 +521,12 @@ function cleanFbUrl_(u) {
 }
 
 function normaliserUrlsFacebook() {
-  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.FINAL);
-  if (!s || s.getLastRow() < 2) { SpreadsheetApp.getUi().alert('FINAL vide.'); return; }
+  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.MASTER);
+  if (!s || s.getLastRow() < 2) { SpreadsheetApp.getUi().alert('master vide.'); return; }
   const n = s.getLastRow() - 1;
-  const vals = s.getRange(2, 1, n, PC.HEADERS_FINAL.length).getValues();
+  const vals = s.getRange(2, 1, n, PC.HEADERS_MASTER.length).getValues();
   const seen = {};
-  const out = [['fb_url_clean', 'ligne_final', 'nom_entreprise']];
+  const out = [['fb_url_clean', 'ligne_master', 'nom_entreprise']];
   vals.forEach((r, i) => {
     if (cleanEmail_(r[10])) return; // déjà un email → pas besoin de FB
     const fb = cleanFbUrl_(r[8]);
@@ -543,7 +543,7 @@ function fusionnerEmailsFB() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const f = ss.getSheetByName(PC.FB_RESULT);
   if (!f || f.getLastRow() < 2) {
-    SpreadsheetApp.getUi().alert('Colle d\'abord l\'export FB dans ' + PC.FB_RESULT + ' : colonne A = URL page, colonne B = email trouvé.');
+    SpreadsheetApp.getUi().alert('Colle d\'abord l\'export FB dans l\'onglet ' + PC.FB_RESULT + ' : colonne A = URL page, colonne B = email trouvé.');
     getOrCreateSheet_(PC.FB_RESULT);
     return;
   }
@@ -553,16 +553,16 @@ function fusionnerEmailsFB() {
     const e = cleanEmail_(r[1]);
     if (u && e && PC.EMAIL_OK.test(e) && !PC.POUBELLE_AUTO.test(e)) map[u] = e;
   });
-  const s = ss.getSheetByName(PC.FINAL);
+  const s = ss.getSheetByName(PC.MASTER);
   const n = s.getLastRow() - 1;
-  const vals = s.getRange(2, 1, n, PC.HEADERS_FINAL.length).getValues();
+  const vals = s.getRange(2, 1, n, PC.HEADERS_MASTER.length).getValues();
   let n2 = 0;
   vals.forEach(r => {
     if (cleanEmail_(r[10])) return;
     const hit = map[cleanFbUrl_(r[8])];
     if (hit) { r[5] = hit; r[10] = r[6] || r[7] || hit; n2++; }
   });
-  s.getRange(2, 1, n, PC.HEADERS_FINAL.length).setValues(vals);
+  s.getRange(2, 1, n, PC.HEADERS_MASTER.length).setValues(vals);
   journal_('fusionnerEmailsFB', n2 + ' emails FB fusionnés (col F + email_final). Pense à relancer l\'étape 6.');
   toast_(n2 + ' emails FB fusionnés ✅ (relance l\'étape 6)');
 }
@@ -622,12 +622,12 @@ function fetchGouv_(nom, ville) {
 function enrichirPrenomsGouv() {
   const start = Date.now();
   const props = PropertiesService.getScriptProperties();
-  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.FINAL);
-  if (!s || s.getLastRow() < 2) { SpreadsheetApp.getUi().alert('FINAL vide.'); return; }
+  const s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(PC.MASTER);
+  if (!s || s.getLastRow() < 2) { SpreadsheetApp.getUi().alert('master vide.'); return; }
   const n = s.getLastRow() - 1;
   let row = Number(props.getProperty('PC_GOV_ROW') || 2);
   if (row < 2 || row > n + 1) row = 2;
-  const vals = s.getRange(2, 1, n, PC.HEADERS_FINAL.length).getValues();
+  const vals = s.getRange(2, 1, n, PC.HEADERS_MASTER.length).getValues();
   let traites = 0, trouves = 0, arret = '';
   for (let i = row - 2; i < vals.length; i++) {
     if (timeUp_(start, 5) || traites >= 150) { arret = 'lot terminé (limite temps/volume)'; break; }
@@ -640,10 +640,10 @@ function enrichirPrenomsGouv() {
     if (res.prenom) { r[18] = res.prenom; trouves++; }
     if (res.siren) r[20] = res.siren;
     Utilities.sleep(200);
-    if (traites % 20 === 0) s.getRange(2, 1, n, PC.HEADERS_FINAL.length).setValues(vals); // sauvegarde intermédiaire
+    if (traites % 20 === 0) s.getRange(2, 1, n, PC.HEADERS_MASTER.length).setValues(vals); // sauvegarde intermédiaire
     row = i + 3;
   }
-  s.getRange(2, 1, n, PC.HEADERS_FINAL.length).setValues(vals);
+  s.getRange(2, 1, n, PC.HEADERS_MASTER.length).setValues(vals);
   props.setProperty('PC_GOV_ROW', String(row));
   const fini = row > n + 1;
   if (fini) { props.deleteProperty('PC_GOV_ROW'); arreterDeclencheurGouv(); }

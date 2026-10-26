@@ -43,7 +43,7 @@
 4. **Étape Facebook probablement JAMAIS exécutée** : `email_final` = toujours `emails/0` sur les lignes visibles, aucune colonne `email_fb`. Gardée en optionnel dans le kit.
 5. **Prénoms dirigeants : colonne vide** sur tête + queue du fichier → l'enrichissement Gouv n'a jamais abouti (API en 502 ?). Version robuste + batchée fournie.
 6. **Warmup jamais démarré** : la date de début est vide dans `warmup_emails`.
-7. **Statuts email** : que des `valid` et `missing` visibles → les lignes `invalid`/`catch-all` ont peut-être été supprimées ou sont au milieu (je n'ai vu que le début et la fin). Le kit gère les 5 statuts.
+7. **Emails JAMAIS vérifiés** (tu l'as confirmé) : `valid` = juste « email présent », PAS « délivrable ». Les `invalid`/`catch-all` n'existent pas encore → la vraie vérification est à faire au run 2 (voir `05`).
 8. **Écart 2 840 → ~1 750 lignes** : dédup inter-requêtes + suppressions probables (ou autres onglets invisibles pour moi — l'export CSV ne montre que la 1ʳᵉ feuille).
 9. **Note Lead rétro-ingéniérée à ~95 %** : formule v2 dans le kit qui reproduit tous les scores certains (100/85/73/71/20/15), avec 2 anomalies documentées (voir `06-segmentation-scoring.md`).
 10. **Hunter.io : qualité variable constatée** (mauvais domaines .ch, mauvaises entités) → vérification croisée obligatoire (voir `04-enrichissements.md`).
