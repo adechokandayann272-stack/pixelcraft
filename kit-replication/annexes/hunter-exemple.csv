@@ -1,0 +1,4 @@
+ÉTABLISSEMENT;EMAIL;FIABILITÉ %;STATUT;TYPE;PRÉNOM;NOM;DOMAINE;VILLE;PAYS
+Exemple Boulangerie Dupont;marie.dupont@boulangerie-dupont.fr;94;Valid;Personal;Marie;Dupont;boulangerie-dupont.fr;Versailles;FR
+Exemple Garage Martin;contact@garage-martin.fr;82;Valid;Generic;;;;garage-martin.fr;;FR
+Exemple Cabinet Durand;contact@cabinet-durand.ch;67;Valid;Personal;Jean;Durand;cabinet-durand.ch;Genève;CH
