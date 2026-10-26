@@ -180,7 +180,9 @@ function assemblerBrut() {
   const out = [];
   let lus = 0, dups = 0;
 
-  bruts.forEach(sh => {
+  let stopped = false;
+  for (let b = 0; b < bruts.length && !stopped; b++) {
+    const sh = bruts[b];
     const vals = sh.getRange(1, 1, sh.getLastRow(), sh.getLastColumn()).getValues();
     const head = vals[0].map(h => String(h).trim().toLowerCase());
     const at = names => {
@@ -190,7 +192,7 @@ function assemblerBrut() {
     const c = {};
     Object.keys(SRC).forEach(k => { c[k] = at(SRC[k]); });
     for (let r = 1; r < vals.length; r++) {
-      if (timeUp_(start)) { journal_('assemblerBrut', 'STOP anti-timeout — relance pour continuer.'); return; }
+      if (timeUp_(start)) { journal_('assemblerBrut', 'STOP anti-timeout — relance pour continuer.'); stopped = true; break; }
       const g = i => (i === -1 ? '' : String(vals[r][i] || '').trim());
       const url = g(c.url);
       let pid = g(c.placeId);
@@ -208,11 +210,19 @@ function assemblerBrut() {
       if (seen[pid] === undefined) { seen[pid] = out.length; out.push(row); }
       else { dups++; if (row._rich > out[seen[pid]]._rich) out[seen[pid]] = row; }
     }
-  });
+  }
 
   const data = out.map(o => [o.title, o.pid, o.address, o.cat, o.city, '',
     o.e0, o.e1, o.fb, o.insta, '', o.phone, o.street, o.url, o.site,
     '', '', '', '', 0, '']);
+  if (!data.length) {
+    SpreadsheetApp.getUi().alert('Aucune ligne assemblée.');
+    return;
+  }
+  if (fin.getLastRow() === 0) creerStructureMaster();
+  if (fin.getLastRow() > 1) {
+    fin.getRange(2, 1, fin.getLastRow() - 1, PC.HEADERS_MASTER.length).clearContent();
+  }
   fin.getRange(2, 1, data.length, PC.HEADERS_MASTER.length).setValues(data);
   journal_('assemblerBrut', lus + ' lignes lues dans ' + bruts.length + ' brut(s), ' + dups + ' doublons fusionnés, ' + out.length + ' lignes écrites dans master.');
   toast_('Assemblé : ' + out.length + ' lignes (' + dups + ' doublons fusionnés) ✅');
@@ -341,10 +351,11 @@ function exporterEmailsAVerifier() {
 
 function normaliserStatut_(brut) {
   const t = normalizeTxt_(brut);
-  if (/deliverable|valid|^ok$|delivre/.test(t)) return 'valid';
+  // Invalides AVANT valides : "invalid" contient "valid", "undeliverable" contient "deliverable".
+  if (/undeliverable|\binvalid\b|invalide|^ko$|\bbounce\b|inexistant/.test(t)) return 'invalid';
   if (/accept.?all|catch.?all|accepte/.test(t)) return 'catch-all';
-  if (/risky|risque|unknown|inconnu/.test(t)) return 'catch-all'; // v2 : risky → tester prudemment
-  if (/undeliverable|invalid|invalide|^ko$|bounce|inexistant/.test(t)) return 'invalid';
+  if (/risky|risque|unknown|inconnu/.test(t)) return 'catch-all';
+  if (/deliverable|\bvalid\b|^ok$|delivre/.test(t)) return 'valid';
   return '';
 }
 
@@ -446,13 +457,13 @@ function genererSegments() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const F = PC.MASTER + '!';
   const segs = [
-    ['A', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "NOMINATIF"); ' + F + 'O2:O="")'],
-    ['B', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "NOMINATIF"); ' + F + 'O2:O<>"")'],
-    ['C', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "GÉNÉRIQUE|CATCH-ALL"); ' + F + 'O2:O="")'],
-    ['D', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "GÉNÉRIQUE|CATCH-ALL"); ' + F + 'O2:O<>"")'],
-    ['RS', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "Pas d\'email|INVALIDE"); (' + F + 'I2:I<>"")+(' + F + 'J2:J<>"")>0)'],
-    ['Sans Site', 'FILTER(' + F + 'A2:U; ' + F + 'O2:O="")'],
-    ['RS Sans Email & Site', 'FILTER(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "Pas d\'email|INVALIDE"); ' + F + 'O2:O=""; (' + F + 'I2:I<>"")+(' + F + 'J2:J<>"")>0)']
+    ['A', 'FILTRE(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "NOMINATIF"); ' + F + 'O2:O="")'],
+    ['B', 'FILTRE(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "NOMINATIF"); ' + F + 'O2:O<>"")'],
+    ['C', 'FILTRE(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "GÉNÉRIQUE|CATCH-ALL"); ' + F + 'O2:O="")'],
+    ['D', 'FILTRE(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "GÉNÉRIQUE|CATCH-ALL"); ' + F + 'O2:O<>"")'],
+    ['RS', 'FILTRE(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "Pas d\'email|INVALIDE"); (' + F + 'I2:I<>"")+(' + F + 'J2:J<>"")>0)'],
+    ['Sans Site', 'FILTRE(' + F + 'A2:U; ' + F + 'O2:O="")'],
+    ['RS Sans Email & Site', 'FILTRE(' + F + 'A2:U; REGEXMATCH(' + F + 'Q2:Q; "Pas d\'email|INVALIDE"); ' + F + 'O2:O=""; (' + F + 'I2:I<>"")+(' + F + 'J2:J<>"")>0)']
   ];
   segs.forEach(sg => {
     const sh = getOrCreateSheet_(sg[0]);
@@ -515,6 +526,7 @@ function cleanFbUrl_(u) {
   if (/^facebook\.com/i.test(u)) u = 'https://www.' + u;
   if (/^www\.facebook\.com/i.test(u)) u = 'https://' + u;
   u = u.replace(/^https:\/\/m\.facebook\.com/i, 'https://www.facebook.com');
+  u = u.replace(/^https:\/\/facebook\.com/i, 'https://www.facebook.com');
   u = u.split('?')[0].split('#')[0];
   if (u.length > 8 && u.charAt(u.length - 1) === '/') u = u.slice(0, -1);
   return u.toLowerCase();
