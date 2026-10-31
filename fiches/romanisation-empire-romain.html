@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fiche — L'empire romain : brassage culturel et religieux en Méditerranée</title>
+<style>
+  :root{
+    --ink:#251d16;
+    --ink-soft:#5b4a3a;
+    --paper:#f8f2e4;
+    --paper-2:#fffdf7;
+    --line:#e0d4bd;
+    --pourpre:#7c1f1f;
+    --pourpre-soft:#f3e2e0;
+    --gold:#a98a4b;
+    --sea:#1f4f5e;
+    --green:#2f6b4f;
+    --shadow:0 1px 2px rgba(37,29,22,.06), 0 8px 24px -12px rgba(37,29,22,.25);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--ink);
+    background:
+      radial-gradient(1100px 500px at 80% -10%, #fdf7ea 0%, transparent 60%),
+      radial-gradient(900px 400px at 0% 100%, #f3ead8 0%, transparent 55%),
+      var(--paper);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--sea);text-decoration:none;border-bottom:1px solid rgba(31,79,94,.35)}
+  a:hover{border-bottom-color:var(--sea)}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(248,242,228,.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-in{max-width:1080px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:700;letter-spacing:.02em;color:var(--pourpre)}
+  .brand .mark{
+    width:30px;height:30px;border-radius:50%;
+    display:grid;place-items:center;
+    background:var(--pourpre);color:#f7e9d0;font-size:15px;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);
+  }
+  .brand small{display:block;font-family:var(--sans);font-weight:500;font-size:11px;color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase}
+  nav.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+  nav.tabs button{
+    font:inherit;font-size:13.5px;font-weight:600;
+    padding:7px 12px;border-radius:999px;border:1px solid transparent;
+    background:transparent;color:var(--ink-soft);cursor:pointer;transition:.15s;
+  }
+  nav.tabs button:hover{background:#f0e6d2;color:var(--ink)}
+  nav.tabs button[aria-selected="true"]{background:var(--pourpre);color:#fdf5e6;border-color:var(--pourpre)}
+
+  /* ---------- layout ---------- */
+  main{max-width:1080px;margin:0 auto;padding:26px 18px 70px}
+  .panel{display:none;animation:fade .25s ease}
+  .panel.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  .hero{
+    background:linear-gradient(160deg,#7c1f1f 0%,#5d1717 55%,#3f1010 100%);
+    color:#fdf3e2;border-radius:20px;padding:26px 26px 24px;position:relative;overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .hero::after{
+    content:"";position:absolute;right:-70px;top:-70px;width:260px;height:260px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%,rgba(255,225,170,.22),transparent 65%);
+    pointer-events:none;
+  }
+  .hero .kicker{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#e8c893;font-weight:700;margin:0 0 8px}
+  .hero h1{font-family:var(--serif);font-size:clamp(1.5rem,3.6vw,2.15rem);line-height:1.2;margin:0 0 10px;font-weight:700}
+  .hero p{margin:0;color:#f0dcc0;font-size:14.5px;max-width:62ch}
+  .hero .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .chip{
+    font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;
+    background:rgba(255,255,255,.12);color:#fbeed6;border:1px solid rgba(255,255,255,.18)
+  }
+
+  h2.sec{
+    font-family:var(--serif);font-size:1.35rem;margin:34px 0 6px;color:var(--pourpre);
+    display:flex;align-items:center;gap:10px;
+  }
+  h2.sec::before{content:"";width:22px;height:2px;background:var(--gold);border-radius:2px}
+  h3.sub{font-family:var(--serif);font-size:1.05rem;margin:22px 0 8px;color:var(--ink)}
+  .lead{color:var(--ink-soft);font-size:14.5px;margin:0 0 14px}
+
+  .card{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:14px;
+    padding:18px 20px;box-shadow:var(--shadow);
+  }
+
+  /* ---------- texte à trous ---------- */
+  .toolbar{
+    display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+    margin:18px 0 16px;padding:12px 14px;border-radius:14px;
+    background:#efe4cf;border:1px solid var(--line);
+  }
+  .toolbar .btn{
+    font:inherit;font-size:13px;font-weight:700;cursor:pointer;
+    padding:8px 14px;border-radius:10px;border:1px solid var(--line);
+    background:#fffdf7;color:var(--ink);transition:.15s;
+  }
+  .toolbar .btn:hover{background:#fff;border-color:var(--gold);transform:translateY(-1px)}
+  .toolbar .btn.primary{background:var(--pourpre);color:#fdf5e6;border-color:var(--pourpre)}
+  .counter{margin-left:auto;font-size:13px;font-weight:700;color:var(--pourpre);white-space:nowrap}
+  .counter small{font-weight:600;color:var(--ink-soft)}
+
+  .course{font-size:15.5px;line-height:1.95}
+  .course p{margin:0 0 15px}
+  .course em{color:#4a3b2c}
+  .course .tit{
+    font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--pourpre);
+    margin:26px 0 12px;padding-bottom:6px;border-bottom:2px dotted var(--line);
+  }
+  .course .ital{color:#4b3d2e;background:linear-gradient(#fdf6e5,#fdf6e5);padding:2px 0}
+  blockquote.q{
+    margin:0 0 15px;padding:12px 16px;border-left:3px solid var(--gold);
+    background:#fdf7e9;border-radius:0 10px 10px 0;color:#4b3d2e;font-size:14.5px;
+  }
+
+  .blk{
+    font:inherit;font-size:.97em;font-weight:800;line-height:1.35;
+    color:var(--pourpre);background:var(--pourpre-soft);
+    border:none;border-bottom:2px solid rgba(124,31,31,.35);border-radius:5px;
+    padding:1px 7px;margin:0 1px;cursor:pointer;transition:.15s;
+    vertical-align:baseline;
+  }
+  .blk:hover{background:#eccecb}
+  .blk.off{
+    color:transparent;background:#efe4cf;border-bottom:2px dashed var(--gold);
+    position:relative;
+  }
+  .blk.off::after{
+    content:"…";position:absolute;inset:0;display:grid;place-items:center;
+    color:var(--gold);font-size:.9em;font-weight:700;
+  }
+  .blk.off:hover{background:#e6d6b8}
+
+  .note{
+    font-size:13.5px;color:#4c3e2f;background:#fbf5e8;border:1px dashed var(--line);
+    border-radius:12px;padding:12px 14px;margin:0 0 18px;
+  }
+  .note strong{color:var(--pourpre)}
+  .note .tag{
+    display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    background:var(--gold);color:#fff;border-radius:5px;padding:2px 7px;margin-right:8px;vertical-align:1px;
+  }
+
+  /* ---------- fiche ---------- */
+  .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+  .notion{background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow)}
+  .notion h4{margin:0 0 6px;font-family:var(--serif);font-size:1.02rem;color:var(--pourpre)}
+  .notion p{margin:0;font-size:14px;color:#43372a}
+  .notion .word{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:800;display:block;margin-bottom:4px}
+
+  ul.clean{margin:8px 0 0;padding-left:20px}
+  ul.clean li{margin:6px 0;font-size:14.5px}
+
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14.5px}
+  .kv dt{font-weight:800;color:var(--pourpre);font-family:var(--serif)}
+  .kv dd{margin:0;color:#43372a}
+
+  /* schema */
+  .schema{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:center}
+  @media(max-width:760px){.schema{grid-template-columns:1fr}}
+  .schema svg{width:100%;height:auto;display:block}
+  .caption{font-size:12.5px;color:var(--ink-soft);text-align:center;margin-top:6px}
+
+  /* ---------- timeline ---------- */
+  .tl{position:relative;margin:18px 0 0;padding-left:26px}
+  .tl::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--gold),var(--line))}
+  .tl .item{position:relative;margin:0 0 16px}
+  .tl .item::before{
+    content:"";position:absolute;left:-22px;top:8px;width:11px;height:11px;border-radius:50%;
+    background:var(--paper-2);border:3px solid var(--pourpre);
+  }
+  .tl .item.key::before{background:var(--pourpre)}
+  .tl .year{
+    font-family:var(--serif);font-weight:800;color:var(--pourpre);font-size:1.02rem;
+    display:inline-block;min-width:76px;
+  }
+  .tl .txt{font-size:14.5px;color:#3f342a}
+  .tl .txt b{color:var(--ink)}
+
+  /* ---------- quiz ---------- */
+  .qwrap{display:grid;gap:14px;margin-top:16px}
+  .q{background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow)}
+  .q .qh{font-weight:700;font-size:15px;margin:0 0 10px;display:flex;gap:10px}
+  .q .num{
+    flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--pourpre);color:#fdf5e6;
+    display:grid;place-items:center;font-size:12px;font-weight:800;font-family:var(--sans)
+  }
+  .opts{display:grid;gap:8px}
+  .opt{
+    font:inherit;text-align:left;font-size:14px;cursor:pointer;
+    padding:10px 13px;border-radius:10px;border:1px solid var(--line);background:#fffdf7;
+    color:#3b3128;transition:.13s;display:flex;gap:9px;align-items:flex-start;
+  }
+  .opt:hover:not(:disabled){border-color:var(--gold);background:#fff8e9}
+  .opt .ltr{
+    flex:0 0 auto;width:20px;height:20px;border-radius:6px;background:#f0e6d2;
+    display:grid;place-items:center;font-size:11.5px;font-weight:800;color:var(--ink-soft)
+  }
+  .opt.correct{border-color:#2f6b4f;background:#e9f4ed;color:#23503c;font-weight:600}
+  .opt.correct .ltr{background:#2f6b4f;color:#fff}
+  .opt.wrong{border-color:#a43535;background:#fbecec;color:#8a2b2b}
+  .opt.wrong .ltr{background:#a43535;color:#fff}
+  .opt:disabled{cursor:default}
+  .expl{
+    margin:10px 0 0;font-size:13.5px;color:#4a3d2e;background:#fbf5e8;
+    border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:9px 12px;display:none;
+  }
+  .q.done .expl{display:block}
+  .scorebar{
+    display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+    background:#efe4cf;border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+  }
+  .scorebar .big{font-family:var(--serif);font-size:1.5rem;font-weight:800;color:var(--pourpre)}
+  .scorebar .msg{font-size:14px;color:#4a3d2e}
+
+  /* ---------- memo ---------- */
+  .memo{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .memo .m{background:var(--paper-2);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;padding:14px 16px}
+  .memo .m h4{margin:0 0 8px;font-family:var(--serif);font-size:1rem;color:var(--pourpre)}
+  .memo .m p,.memo .m li{font-size:14px;color:#42362a;margin:0}
+  .memo .m li{margin:5px 0}
+  .mnemo{font-size:14px;color:#42362a}
+  .mnemo b{background:#fdf0c9;padding:0 4px;border-radius:4px}
+
+  footer{
+    max-width:1080px;margin:0 auto;padding:0 18px 50px;color:var(--ink-soft);font-size:12.5px;
+    border-top:1px solid var(--line);padding-top:16px;
+  }
+  footer p{margin:6px 0}
+
+  @media (max-width:640px){
+    .course{font-size:15px;line-height:1.85}
+    .hero{padding:20px}
+    .brand small{display:none}
+  }
+
+  /* ---------- print ---------- */
+  @media print{
+    body{background:#fff}
+    .topbar,nav.tabs,.toolbar,.scorebar .btn,.noprint{display:none !important}
+    .panel{display:block !important;page-break-before:always}
+    .panel:first-of-type{page-break-before:auto}
+    .hero{background:#fff;color:#000;border:2px solid #7c1f1f;box-shadow:none}
+    .hero .kicker,.hero p{color:#333}
+    .hero .chips{display:none}
+    .card,.notion,.q,.memo .m,.blk{box-shadow:none}
+    .blk{min-width:0 !important;background:none !important;color:#000 !important;border:none !important;padding:0 !important;font-weight:700;text-decoration:underline;text-decoration-color:#bbb}
+    .blk.off::after{content:none !important}
+    .opt{break-inside:avoid}
+    .expl{display:block !important}
+    .course p,.q,.notion{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <span class="mark">🏛</span>
+      <span>Histoire · 2<sup>e</sup> héritage
+        <small>La Méditerranée antique</small>
+      </span>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Sections de la fiche">
+      <button role="tab" aria-selected="true" data-tab="texte">Texte à trous</button>
+      <button role="tab" aria-selected="false" data-tab="fiche">Fiche de cours</button>
+      <button role="tab" aria-selected="false" data-tab="dates">Dates clés</button>
+      <button role="tab" aria-selected="false" data-tab="quiz">Quiz</button>
+      <button role="tab" aria-selected="false" data-tab="memo">Mémo express</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ 1. TEXTE À TROUS ============ -->
+  <section class="panel active" id="panel-texte">
+    <div class="hero">
+      <p class="kicker">B / 2<sup>e</sup> héritage · Seconde · Thème 1</p>
+      <h1>L'empire romain favorise le brassage culturel et religieux en Méditerranée</h1>
+      <p>Texte à trous corrigé + fiche de révision. Clique sur un mot en rouge pour le <strong>masquer et te tester</strong>, puis sur le pointillé doré pour le retrouver. La vidéo du cours : « La romanisation de l'Empire, une multitude de petites Romes ».</p>
+      <div class="chips">
+        <span class="chip">I<sup>er</sup> – III<sup>e</sup> siècle</span>
+        <span class="chip">212 → 476</span>
+        <span class="chip">Romanisation · Christianisation</span>
+      </div>
+    </div>
+
+    <div class="toolbar noprint">
+      <button class="btn primary" id="hideAll">🙈 Masquer toutes les réponses</button>
+      <button class="btn" id="showAll">👁 Tout révéler</button>
+      <button class="btn" onclick="window.print()">🖨 Imprimer</button>
+      <span class="counter" id="counter">— <small>réponses visibles</small></span>
+    </div>
+
+    <div class="card course" id="course">
+
+      <div class="tit">1 / La romanisation</div>
+
+      <p>Dans l'empire romain, l'administration civile et militaire permet d'assurer la prospérité et la stabilité de l'Empire du I<sup>er</sup> au début du III<sup>e</sup> siècle, ce qui permet aux 80 millions d'habitants d'accepter la domination. L'empire est divisé en provinces <button class="blk" data-a="sénatoriales">sénatoriales</button> et en provinces <button class="blk" data-a="impériales">impériales</button> où les légionnaires de l'armée restent présents.</p>
+
+      <div class="note">
+        <span class="tag">À comprendre</span>
+        <strong>Provinces sénatoriales</strong> = provinces anciennes et pacifiées, à l'intérieur de l'Empire (administrées par le Sénat de Rome). <strong>Provinces impériales</strong> = provinces de <em>frontière</em> (le <em>limes</em>), où stationnent les <strong>légions</strong> : c'est l'empereur qui les commande, car l'armée est sa source de pouvoir.
+      </div>
+
+      <p class="ital"><em>La romanisation est un processus d'acculturation par adhésion et non par la force = le contact continu et direct entre des groupes d'individus de cultures différentes entraîne des changements dans les modèles culturels originaux. Cette acculturation touche d'abord les élites provinciales (les plus riches et ceux qui avaient du pouvoir avant l'arrivée des Romains) qui vont se vêtir à la mode romaine (<button class="blk" data-a="la toge">la toge</button>), construire des sépultures à la mode romaine, parler le latin et le grec, adopter les dieux romains, mais Rome adopte aussi certaines divinités comme Isis, déesse égyptienne. On parle de syncrétisme religieux = fusion de plusieurs religions. Rome laisse une large <button class="blk" data-a="autonomie">autonomie</button> aux cités. Elles sont administrées par des magistrats et un sénat comme à Rome. Dans les territoires conquis, Rome fonde de nouvelles cités sur le même modèle, avec deux grandes rues principales, le <button class="blk" data-a="cardo">cardo</button> et le <button class="blk" data-a="decumanus">decumanus</button>, au carrefour desquels se trouve le <button class="blk" data-a="forum">forum</button>. De nombreux édifices religieux ou servant aux loisirs sont construits : <button class="blk" data-a="temples, thermes, théâtres, amphithéâtres, cirques">temples, thermes, théâtres, amphithéâtres, cirques</button>. Au nord de l'Afrique, <button class="blk" data-a="Timgad">Timgad</button> comme <button class="blk" data-a="Trèves">Trèves</button> dans l'Allemagne actuelle correspondent à ce modèle. Les cités sont une <button class="blk" data-a="vitrine">vitrine</button> vivante de la civilisation romaine. Certains empereurs sont même issus des provinces, comme <button class="blk" data-a="Claude">Claude</button> né en Gaule (Lyon), <button class="blk" data-a="Trajan">Trajan</button> né en Hispanie et Septime Sévère venu d'<button class="blk" data-a="Afrique">Afrique</button> (Leptis Magna). L'empereur Caracalla, en <button class="blk" data-a="212">212</button>, accorde la citoyenneté à tous les hommes libres de l'empire. Ils peuvent accéder aux postes au sein de l'administration locale et de l'armée romaine. Mais ils doivent désormais rendre un culte à l'empereur.</em></p>
+
+      <p>Rome est également le centre d'un immense réseau routier et maritime qui témoigne de sa domination territoriale. La <em>Pax romana</em> apporte la stabilité, mais Rome exploite les richesses de ses provinces : <button class="blk" data-a="l'or, l'argent et le marbre">l'or, l'argent et le marbre</button> sont extraits des mines ; les produits agricoles arrivent aussi : <button class="blk" data-a="le blé, l'huile d'olive et le vin">le blé, l'huile d'olive et le vin</button> ; et enfin, un commerce d'esclaves est indispensable.</p>
+
+      <div class="note">
+        <span class="tag">Définitions</span>
+        <strong>Acculturation</strong> = ensemble des phénomènes qui résultent d'un contact continu et direct entre des groupes d'individus de cultures différentes et qui entraînent des changements dans les modèles culturels originaux.<br>
+        <strong>Syncrétisme religieux</strong> = les Romains n'hésitent pas à ajouter des dieux à leur panthéon, comme le culte d'Isis emprunté aux Égyptiens.
+      </div>
+
+      <p>Le judaïsme et le christianisme ont un statut particulier car ce sont des <strong>monothéismes</strong>. Le judaïsme est ancien et limité à la région appelée Palestine, mais le christianisme est récent : né au I<sup>er</sup> siècle à la suite de la prédication d'un Juif nommé <strong>Jésus</strong>, appelé après sa mort par ceux qui suivent son message le <strong>Christ</strong> = le sauveur. Ce qui rend suspects les chrétiens aux yeux des Romains, c'est que, n'adorant que leur Dieu unique, ils refusent de pratiquer le <strong>culte impérial</strong> = culte consacré à l'empereur, père de la patrie. Ils sont persécutés à plusieurs reprises, surtout au début du IV<sup>e</sup> siècle.</p>
+
+      <div class="tit">2 / La christianisation progressive sous le règne de l'empereur Constantin (310–337)</div>
+
+      <p>En <strong>306</strong>, Constantin, dont la mère est chrétienne alors que seulement 5 à 10 % de la population de l'Empire l'est, devient empereur et prend des décisions capitales qui vont favoriser la christianisation de l'Empire romain.</p>
+
+      <p>En <strong>313</strong>, par l'<strong>édit de Milan</strong>, il autorise la religion chrétienne dans l'Empire. Les citoyens de l'Empire sont dorénavant dispensés de vénérer l'empereur comme un dieu. Les chrétiens ne sont plus persécutés après cette date.</p>
+
+      <p>Constantin s'affirme comme <strong>unique empereur en 324</strong>, rétablit la paix, réorganise l'administration, l'armée et la monnaie.</p>
+
+      <p>En <strong>325</strong>, il réunit tous les évêques afin d'unifier l'Église lors du <strong>concile de Nicée</strong>, où est fixé le <strong>dogme chrétien</strong> = le fondement de la croyance chrétienne = la <strong>Trinité</strong> (Dieu, Jésus-Christ, Saint-Esprit), la résurrection, la vie éternelle.</p>
+
+      <p>Il fonde en <strong>330</strong>, sur le site de Byzance, la ville de <strong>Constantinople</strong>, une deuxième Rome pour mieux protéger les frontières orientales. Il fait construire des églises à Rome, à Constantinople et à Jérusalem.</p>
+
+      <p>En <strong>337</strong>, il est baptisé sur son lit de mort.</p>
+
+      <p>En <strong>380</strong>, l'empereur <strong>Théodose</strong> impose le christianisme comme <strong>religion officielle</strong> de l'Empire ; les cultes païens sont interdits. Mais il divise également l'empire en deux, en <strong>395</strong> : celui d'<strong>Orient</strong> et celui d'<strong>Occident</strong>, mettant fin à l'unité de l'empire romain, qui est déstabilisé par de puissants flux migratoires longtemps appelés « invasions barbares ».</p>
+
+      <p>En <strong>476</strong>, le dernier empereur romain d'Occident est renversé par un chef germanique romanisé. Seul l'empire d'Orient subsiste : c'est l'<strong>empire byzantin</strong>.</p>
+
+      <div class="tit">Conclusion</div>
+
+      <blockquote class="q">
+        La Méditerranée antique tient une place très particulière dans l'histoire de l'Europe contemporaine :<br>
+        — d'<strong>Athènes</strong>, nous avons hérité des principes de la <strong>démocratie</strong> ;<br>
+        — de <strong>Rome</strong>, un héritage <strong>culturel</strong> (la romanisation), <strong>linguistique</strong> et <strong>politique</strong>. Rome invente l'empire et associe le pouvoir politique au religieux, d'abord le polythéisme puis le catholicisme.
+      </blockquote>
+
+      <div class="note">
+        <span class="tag">Précision</span>
+        Les réponses en rouge sont celles du cours. Trois passages très « ouverts » (<em>édifices, mines, produits agricoles</em>) acceptent plusieurs formulations : vérifie la version exacte de ta vidéo / de ton professeur. Pour aller plus loin : l'interdiction des cultes païens est précisée par les lois de <strong>391-392</strong> ; le christianisme devient vraiment majoritaire au IV<sup>e</sup> siècle.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. FICHE ============ -->
+  <section class="panel" id="panel-fiche">
+    <h2 class="sec">Les 3 notions à ne pas confondre</h2>
+    <p class="lead">Tout le cours tourne autour de ces trois mots : si tu sais les définir avec un exemple, tu as l'essentiel.</p>
+    <div class="grid">
+      <div class="notion">
+        <span class="word">Notion 1</span>
+        <h4>Romanisation</h4>
+        <p>Processus par lequel les peuples conquis <strong>adoptent la culture romaine</strong> (langue, mode de vie, droit, urbanisme, dieux). Elle se fait par <strong>adhésion</strong>, pas par la force : les élites y trouvent un avantage (pouvoir, carrière, citoyenneté).</p>
+      </div>
+      <div class="notion">
+        <span class="word">Notion 2</span>
+        <h4>Acculturation</h4>
+        <p>Contact <strong>continu et direct</strong> entre des groupes de cultures différentes, qui transforme les modèles culturels d'origine. La romanisation est une acculturation : elle va dans les <strong>deux sens</strong> (Rome emprunte aussi Isis, Mithra, le culte de Cybèle…).</p>
+      </div>
+      <div class="notion">
+        <span class="word">Notion 3</span>
+        <h4>Syncrétisme religieux</h4>
+        <p><strong>Fusion / superposition de plusieurs religions</strong>. Le panthéon romain s'enrichit de dieux étrangers : Isis (Égypte), Cybèle (Asie Mineure), Mithra (Perse). Les Romains ne cherchent pas à détruire les dieux des autres : ils les intègrent.</p>
+      </div>
+    </div>
+
+    <h2 class="sec">Comment Rome tient-elle son empire ?</h2>
+    <div class="grid">
+      <div class="notion">
+        <h4>Administrer</h4>
+        <ul class="clean">
+          <li><strong>Provinces sénatoriales</strong> : intérieures, pacifiées, confiées au Sénat.</li>
+          <li><strong>Provinces impériales</strong> : frontalières, avec les <strong>légions</strong>, dirigées par l'empereur.</li>
+          <li>80 millions d'habitants ; paix et prospérité du I<sup>er</sup> au début du III<sup>e</sup> s.</li>
+        </ul>
+      </div>
+      <div class="notion">
+        <h4>Intégrer</h4>
+        <ul class="clean">
+          <li><strong>212</strong> : l'édit de <strong>Caracalla</strong> donne la citoyenneté à tous les hommes libres.</li>
+          <li>Des empereurs viennent des provinces : <strong>Claude</strong> (Lyon), <strong>Trajan</strong> (Hispanie), <strong>Septime Sévère</strong> (Afrique).</li>
+          <li>Contrepartie : le <strong>culte impérial</strong> est exigé.</li>
+        </ul>
+      </div>
+      <div class="notion">
+        <h4>Exploiter</h4>
+        <ul class="clean">
+          <li>Mines : <strong>or, argent, marbre</strong>, fer, plomb.</li>
+          <li>Agriculture : <strong>blé</strong> (Égypte, Afrique), <strong>huile d'olive</strong>, <strong>vin</strong>, garum.</li>
+          <li>Réseau routier + maritime, monnaie unique, <strong>esclaves</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="sec">La cité, vitrine de Rome</h2>
+    <div class="card" style="margin-top:14px">
+      <div class="schema">
+        <div>
+          <svg viewBox="0 0 460 380" role="img" aria-label="Schéma du plan d'une cité romaine : cardo, decumanus, forum, thermes, amphithéâtre">
+            <rect x="8" y="8" width="444" height="364" rx="10" fill="#fdf7e9"/>
+            <!-- rempart -->
+            <rect x="42" y="34" width="376" height="312" fill="#fffdf7" stroke="#7c1f1f" stroke-width="3"/>
+            <!-- insulae -->
+            <g fill="#efe4cf" stroke="#e0d4bd">
+              <rect x="52" y="44" width="48" height="38"/><rect x="108" y="44" width="48" height="38"/><rect x="164" y="44" width="52" height="38"/>
+              <rect x="52" y="92" width="48" height="34"/><rect x="108" y="92" width="48" height="34"/><rect x="164" y="92" width="52" height="34"/>
+              <rect x="52" y="212" width="48" height="38"/><rect x="108" y="212" width="48" height="38"/><rect x="164" y="212" width="52" height="38"/>
+              <rect x="52" y="258" width="48" height="40"/><rect x="108" y="258" width="48" height="40"/><rect x="164" y="258" width="52" height="40"/>
+              <rect x="252" y="44" width="52" height="38"/><rect x="312" y="44" width="48" height="38"/><rect x="368" y="44" width="40" height="38"/>
+              <rect x="252" y="92" width="52" height="34"/><rect x="312" y="92" width="48" height="34"/><rect x="368" y="92" width="40" height="34"/>
+              <rect x="252" y="212" width="52" height="38"/><rect x="312" y="212" width="48" height="38"/>
+              <rect x="252" y="258" width="52" height="40"/><rect x="312" y="258" width="48" height="40"/>
+            </g>
+            <!-- cardo + decumanus -->
+            <rect x="222" y="34" width="16" height="312" fill="#d9c49a" stroke="#c2a878"/>
+            <rect x="42" y="180" width="376" height="16" fill="#d9c49a" stroke="#c2a878"/>
+            <!-- forum -->
+            <rect x="186" y="144" width="88" height="88" fill="#f7dfd9" stroke="#7c1f1f" stroke-width="2.5"/>
+            <rect x="212" y="164" width="36" height="26" fill="#7c1f1f" opacity=".55"/>
+            <text x="230" y="250" font-size="12" font-weight="700" fill="#7c1f1f" text-anchor="middle" font-family="Georgia,serif">forum</text>
+            <!-- thermes -->
+            <rect x="300" y="270" width="96" height="52" rx="4" fill="#dcebf0" stroke="#1f4f5e" stroke-width="2"/>
+            <text x="348" y="300" font-size="11.5" font-weight="700" fill="#1f4f5e" text-anchor="middle" font-family="Georgia,serif">thermes</text>
+            <!-- amphitheatre -->
+            <ellipse cx="110" cy="150" rx="44" ry="22" fill="#f3e2e0" stroke="#7c1f1f" stroke-width="2"/>
+            <ellipse cx="110" cy="150" rx="24" ry="10" fill="#fffdf7" stroke="#7c1f1f" stroke-width="1"/>
+            <text x="110" y="154" font-size="9.5" font-weight="700" fill="#7c1f1f" text-anchor="middle" font-family="Georgia,serif">amphi.</text>
+            <!-- labels rues -->
+            <text x="232" y="26" font-size="12" font-weight="800" fill="#6b5426" text-anchor="middle" font-family="Georgia,serif">CARDO (N – S)</text>
+            <text x="232" y="366" font-size="12" font-weight="800" fill="#6b5426" text-anchor="middle" font-family="Georgia,serif">DECUMANUS (E – O)</text>
+            <!-- porte -->
+            <rect x="222" y="26" width="16" height="8" fill="#7c1f1f"/>
+          </svg>
+          <div class="caption">Plan de principe d'une cité romaine (modèle de Timgad, en Afrique du Nord).</div>
+        </div>
+        <div>
+          <dl class="kv">
+            <dt>Cardo</dt><dd>rue principale <strong>nord–sud</strong></dd>
+            <dt>Decumanus</dt><dd>rue principale <strong>est–ouest</strong></dd>
+            <dt>Forum</dt><dd>place centrale au carrefour : marché, temples, basilique, vie politique</dd>
+            <dt>Autonomie</dt><dd>la cité s'administre elle-même : <em>magistrats</em> + <em>sénat local</em>, sur le modèle de Rome</dd>
+          </dl>
+          <div class="note" style="margin-top:14px">
+            <strong>Pourquoi « vitrine » ?</strong> Parce qu'en entrant dans une cité, un provincial voit <em>concrètement</em> la puissance et le mode de vie de Rome : bains, spectacles, droit, latin. La cité est le lieu où l'on devient romain.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="sec">Du polythéisme au christianisme</h2>
+    <div class="grid">
+      <div class="notion">
+        <h4>1. Le culte impérial</h4>
+        <p>L'empereur est vénéré comme un dieu (ou comme le « fils du divin »). Ce culte est un <strong>acte politique d'allégeance</strong> : refuser, c'est refuser l'Empire.</p>
+      </div>
+      <div class="notion">
+        <h4>2. Le problème des monothéismes</h4>
+        <p>Judaïsme (ancien, limité à la Palestine) et christianisme (né au I<sup>er</sup> s. de la prédication de <strong>Jésus</strong>, « le Christ » = le sauveur) n'admettent qu'un seul Dieu : ils ne peuvent pas sacrifier à l'empereur. D'où les <strong>persécutions</strong>.</p>
+      </div>
+      <div class="notion">
+        <h4>3. Le retournement constantinien</h4>
+        <p>Constantin comprend que le christianisme, déjà très présent dans les villes, peut <strong>unifier</strong> l'Empire. Il le légalise (313), organise l'Église (325) et fonde une nouvelle capitale chrétienne (330).</p>
+      </div>
+      <div class="notion">
+        <h4>4. L'Empire chrétien</h4>
+        <p>Théodose fait du christianisme la <strong>religion officielle</strong> (380) et interdit les cultes païens. Le pouvoir politique et le religieux sont désormais <strong>fusionnés</strong> : c'est l'héritage durable de Rome.</p>
+      </div>
+    </div>
+
+    <h2 class="sec">Ce qu'il faut savoir raconter en 5 phrases</h2>
+    <div class="card" style="margin-top:14px">
+      <ul class="clean">
+        <li>Rome tient son empire par l'<strong>administration</strong> (provinces), l'<strong>armée</strong> (légions aux frontières) et la <strong>citoyenneté</strong> (212).</li>
+        <li>Les élites provinciales <strong>adoptent la culture romaine</strong> : c'est la romanisation, une acculturation par adhésion.</li>
+        <li>La <strong>cité</strong> (forum, cardo, decumanus, thermes, amphithéâtre) est la vitrine de cette civilisation.</li>
+        <li>La religion se <strong>mélange</strong> (syncrétisme), mais les <strong>monothéismes</strong> refusent le culte impérial → persécutions.</li>
+        <li>De <strong>313</strong> à <strong>380</strong>, le christianisme passe de religion tolérée à religion officielle ; en <strong>476</strong>, l'Occident tombe, l'Orient (Byzance) subsiste.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 3. DATES ============ -->
+  <section class="panel" id="panel-dates">
+    <h2 class="sec">La frise chronologique</h2>
+    <p class="lead">Les dates en gras sont celles qu'un contrôle peut demander telles quelles.</p>
+    <div class="card">
+      <div class="tl">
+        <div class="item key"><span class="year">27 av. J.-C.</span><span class="txt"><b>Auguste</b> fonde le régime impérial (fin de la République).</span></div>
+        <div class="item"><span class="year">I<sup>er</sup>–III<sup>e</sup> s.</span><span class="txt">Apogée de l'Empire : <b>Pax romana</b>, prospérité, 80 millions d'habitants. La romanisation bat son plein.</span></div>
+        <div class="item key"><span class="year">212</span><span class="txt"><b>Édit de Caracalla</b> : la citoyenneté romaine à tous les hommes libres de l'Empire.</span></div>
+        <div class="item"><span class="year">306</span><span class="txt"><b>Constantin</b> devient empereur (sa mère, Hélène, est chrétienne).</span></div>
+        <div class="item key"><span class="year">313</span><span class="txt"><b>Édit de Milan</b> : le christianisme est autorisé. Fin des persécutions. Le culte de l'empereur-dieu n'est plus obligatoire.</span></div>
+        <div class="item"><span class="year">324</span><span class="txt">Constantin <b>seul empereur</b> : il rétablit la paix et réforme l'administration, l'armée, la monnaie.</span></div>
+        <div class="item key"><span class="year">325</span><span class="txt"><b>Concile de Nicée</b> : les évêques fixent le dogme chrétien (la <b>Trinité</b>, la résurrection, la vie éternelle).</span></div>
+        <div class="item key"><span class="year">330</span><span class="txt">Fondation de <b>Constantinople</b> sur le site de Byzance : une « seconde Rome » qui protège l'Orient.</span></div>
+        <div class="item"><span class="year">337</span><span class="txt">Mort de Constantin, <b>baptisé sur son lit de mort</b>.</span></div>
+        <div class="item key"><span class="year">380</span><span class="txt"><b>Théodose</b> : le christianisme devient <b>religion officielle</b> de l'Empire ; les cultes païens sont interdits (lois de 391-392).</span></div>
+        <div class="item key"><span class="year">395</span><span class="txt"><b>Partage de l'Empire</b> : Orient / Occident. Fin de l'unité romaine.</span></div>
+        <div class="item key"><span class="year">476</span><span class="txt">Le dernier empereur d'Occident est <b>renversé</b> par un chef germanique romanisé. Seul subsiste l'<b>empire byzantin</b> (Orient).</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. QUIZ ============ -->
+  <section class="panel" id="panel-quiz">
+    <h2 class="sec">Teste-toi (14 questions)</h2>
+    <p class="lead">Une seule bonne réponse par question. La correction s'affiche dès que tu cliques.</p>
+    <div class="scorebar noprint">
+      <div><div class="big"><span id="score">0</span> / <span id="total">14</span></div></div>
+      <div class="msg" id="scoreMsg">Réponds aux questions pour voir ton score.</div>
+      <button class="btn" id="resetQuiz" style="margin-left:auto;font:inherit;font-size:13px;font-weight:700;cursor:pointer;padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:#fffdf7;color:var(--ink)">↻ Recommencer</button>
+    </div>
+    <div class="qwrap" id="quizList"></div>
+  </section>
+
+  <!-- ============ 5. MÉMO ============ -->
+  <section class="panel" id="panel-memo">
+    <h2 class="sec">Mémo express</h2>
+    <p class="lead">Les astuces pour retenir sans apprendre par cœur ligne à ligne.</p>
+    <div class="memo">
+      <div class="m">
+        <h4>Cardo / Decumanus</h4>
+        <p class="mnemo"><b>Cardo</b> = la rue qui « monte » : elle va du <b>Nord au Sud</b>.<br><b>Decumanus</b> = celle qui suit l'<b>horizon</b> : <b>Est–Ouest</b>.<br>À leur croisement : le <b>forum</b> (le cœur de la cité).</p>
+      </div>
+      <div class="m">
+        <h4>Les 4 dates du chrétien</h4>
+        <p class="mnemo"><b>313</b> : on <b>tolère</b> (Milan).<br><b>325</b> : on <b>unifie</b> (Nicée).<br><b>330</b> : on <b>déménage</b> (Constantinople).<br><b>380</b> : on <b>impose</b> (Théodose).</p>
+      </div>
+      <div class="m">
+        <h4>212, la citoyenneté</h4>
+        <p class="mnemo"><b>2-1-2</b> → « <b>2</b> <b>1</b> pour <b>2</b>ous » : la citoyenneté pour tous les hommes libres (Caracalla).</p>
+      </div>
+      <div class="m">
+        <h4>476, la chute</h4>
+        <p class="mnemo"><b>4-7-6</b> : l'Occident <b>s'écroule</b>, l'Orient <b>subsiste</b> (Byzance). Ne confonds pas avec <b>395</b> (le partage).</p>
+      </div>
+      <div class="m">
+        <h4>Les 3 mots-définitions</h4>
+        <p class="mnemo"><b>Romanisation</b> = adopter la culture romaine.<br><b>Acculturation</b> = le contact qui transforme (dans les 2 sens).<br><b>Syncrétisme</b> = mélange de religions (Isis, Cybèle, Mithra).</p>
+      </div>
+      <div class="m">
+        <h4>Pièges classiques</h4>
+        <p class="mnemo">✗ « Les Romains imposent leur culture par la force » → faux : <b>adhésion</b> des élites.<br>✗ Confondre <b>culte impérial</b> et <b>religion officielle</b>.<br>✗ Croire que 313 rend le christianisme <b>officiel</b> : il le rend <b>autorisé</b>.</p>
+      </div>
+      <div class="m">
+        <h4>Les personnages</h4>
+        <p class="mnemo"><b>Caracalla</b> : citoyenneté (212).<br><b>Constantin</b> : Milan, Nicée, Constantinople, baptême.<br><b>Théodose</b> : religion officielle + partage.<br><b>Claude / Trajan / Septime Sévère</b> : empereurs provinciaux.</p>
+      </div>
+      <div class="m">
+        <h4>La phrase-bilan</h4>
+        <p class="mnemo">« Rome <b>unifie</b> la Méditerranée par le droit, la <b>cité</b> et la <b>citoyenneté</b>, puis elle <b>fusionne</b> le politique et le religieux : c'est son double héritage. »</p>
+      </div>
+    </div>
+
+    <h2 class="sec">Plan de récitation (si tu dois réciter le cours)</h2>
+    <div class="card" style="margin-top:14px">
+      <ul class="clean">
+        <li><strong>I. La romanisation</strong> — 1) Un empire administré et tenu (provinces, armée, 212). 2) Une acculturation par adhésion (élites, toge, latin, dieux). 3) La cité, vitrine de Rome (forum, cardo, decumanus, édifices).</li>
+        <li><strong>II. Le brassage religieux</strong> — 1) Polythéisme et syncrétisme. 2) Monothéismes et refus du culte impérial → persécutions.</li>
+        <li><strong>III. La christianisation</strong> — 1) Constantin : 313, 325, 330, 337. 2) Théodose : 380. 3) 395 et 476 : la fin de l'unité.</li>
+        <li><strong>Conclusion</strong> — L'héritage : démocratie d'Athènes + empire, langue et culture de Rome.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p><strong>Fiche d'histoire</strong> — 2<sup>e</sup> héritage : l'empire romain, brassage culturel et religieux en Méditerranée.</p>
+  <p>D'après le cours et la vidéo « La romanisation de l'Empire, une multitude de petites Romes » (youtube.com/watch?v=p5wGZ6VFvjM). Les formulations entre guillemets sont celles du cours ; les précisions complémentaires sont signalées.</p>
+</footer>
+
+<script>
+(function () {
+  /* ---------- onglets ---------- */
+  var tabs = document.querySelectorAll('nav.tabs button');
+  function show(id) {
+    tabs.forEach(function (b) { b.setAttribute('aria-selected', String(b.dataset.tab === id)); });
+    document.querySelectorAll('.panel').forEach(function (p) {
+      p.classList.toggle('active', p.id === 'panel-' + id);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  tabs.forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.tab); }); });
+
+  /* ---------- texte à trous ---------- */
+  var blanks = Array.prototype.slice.call(document.querySelectorAll('.blk'));
+  var counter = document.getElementById('counter');
+
+  // largeur minimum selon la longueur de la réponse, pour que la version masquée
+  // donne un indice visuel sur la longueur du mot attendu
+  blanks.forEach(function (b) {
+    var len = b.dataset.a.length;
+    b.style.minWidth = Math.min(Math.max(len * 0.52, 2.6), 11) + 'em';
+    b.title = 'Cliquer pour masquer / révéler la réponse';
+  });
+
+  function updateCounter() {
+    var shown = blanks.filter(function (b) { return !b.classList.contains('off'); }).length;
+    counter.innerHTML = shown + ' / ' + blanks.length + ' <small>réponses visibles</small>';
+  }
+  blanks.forEach(function (b) {
+    b.addEventListener('click', function () {
+      b.classList.toggle('off');
+      updateCounter();
+    });
+  });
+  document.getElementById('hideAll').addEventListener('click', function () {
+    blanks.forEach(function (b) { b.classList.add('off'); });
+    updateCounter();
+  });
+  document.getElementById('showAll').addEventListener('click', function () {
+    blanks.forEach(function (b) { b.classList.remove('off'); });
+    updateCounter();
+  });
+  updateCounter();
+
+  /* ---------- quiz ---------- */
+  var QUIZ = [
+    {
+      q: "Qu'est-ce que la romanisation ?",
+      o: ["Une conquête militaire imposant la culture romaine par la force",
+          "Un processus d'acculturation par adhésion des populations conquises",
+          "La construction de murailles autour de Rome",
+          "L'installation de colons romains en Gaule uniquement"],
+      a: 1,
+      e: "La romanisation est une acculturation : le contact continu avec Rome transforme les cultures locales, et les élites provinciales y adhèrent volontairement (carrière, pouvoir, citoyenneté)."
+    },
+    {
+      q: "Où stationnent les légions romaines ?",
+      o: ["Dans les provinces sénatoriales", "Dans les provinces impériales, aux frontières", "Uniquement à Rome", "En Égypte seulement"],
+      a: 1,
+      e: "Les provinces impériales sont les provinces de frontière (le limes) : l'empereur y commande les légions, ce qui fait de l'armée son principal appui."
+    },
+    {
+      q: "Quel vêtement les élites provinciales adoptent-elles à la mode romaine ?",
+      o: ["La toge", "Le manteau de fourrure", "La braie gauloise", "Le turban"],
+      a: 0,
+      e: "La toge est le vêtement civique romain par excellence : la porter, c'est afficher son appartenance à la culture romaine."
+    },
+    {
+      q: "Le syncrétisme religieux, c'est…",
+      o: ["L'interdiction de tous les cultes étrangers",
+          "La fusion de plusieurs religions, avec ajout de dieux au panthéon",
+          "Le refus de croire en plusieurs dieux",
+          "La destruction des temples des vaincus"],
+      a: 1,
+      e: "Les Romains intègrent des divinités étrangères : Isis (Égypte), Cybèle (Asie Mineure), Mithra (Perse). Le panthéon romain est ouvert."
+    },
+    {
+      q: "Quelles sont les deux grandes rues d'une cité romaine ?",
+      o: ["Le forum et le cardo", "Le cardo et le decumanus", "Le decumanus et le forum", "Le limes et le decumanus"],
+      a: 1,
+      e: "Le cardo (nord–sud) et le decumanus (est–ouest). Ils se croisent au centre : c'est là que se trouve le forum."
+    },
+    {
+      q: "Quel espace se trouve au carrefour du cardo et du decumanus ?",
+      o: ["Les thermes", "L'amphithéâtre", "Le forum", "Le cirque"],
+      a: 2,
+      e: "Le forum est la place centrale : marché, temples, basilique, bâtiments politiques. C'est le cœur civique et religieux de la cité."
+    },
+    {
+      q: "Quelle cité d'Afrique du Nord illustre le modèle de la cité romaine ?",
+      o: ["Carthage", "Timgad", "Alexandrie", "Athènes"],
+      a: 1,
+      e: "Timgad (dans l'Algérie actuelle, en Numidie) est l'exemple classique d'une cité romaine de fondation, avec son plan en damier. Trèves (Allemagne) en est l'équivalent pour la Gaule germanique."
+    },
+    {
+      q: "Que fait l'empereur Caracalla en 212 ?",
+      o: ["Il interdit le christianisme",
+          "Il accorde la citoyenneté romaine à tous les hommes libres de l'Empire",
+          "Il fonde Constantinople",
+          "Il partage l'Empire en deux"],
+      a: 1,
+      e: "L'édit de Caracalla (212) généralise la citoyenneté : les provinciaux peuvent faire carrière dans l'administration et l'armée, mais doivent rendre un culte à l'empereur."
+    },
+    {
+      q: "Pourquoi les chrétiens sont-ils persécutés ?",
+      o: ["Parce qu'ils sont riches", "Parce qu'ils refusent le culte impérial",
+          "Parce qu'ils parlent grec", "Parce qu'ils refusent de payer l'impôt"],
+      a: 1,
+      e: "Monothéistes, ils n'acceptent pas de vénérer l'empereur comme un dieu. Refuser le culte impérial, c'est refuser l'ordre politique romain : d'où les persécutions, surtout au début du IVe siècle."
+    },
+    {
+      q: "Que prévoit l'édit de Milan (313) ?",
+      o: ["Le christianisme devient la religion officielle",
+          "Le christianisme est autorisé dans l'Empire",
+          "Les cultes païens sont interdits",
+          "L'Empire est partagé entre deux empereurs"],
+      a: 1,
+      e: "313 = tolérance / autorisation. Le christianisme ne devient officiel qu'en 380 avec Théodose. C'est un piège classique du contrôle."
+    },
+    {
+      q: "Que se passe-t-il au concile de Nicée (325) ?",
+      o: ["Constantin est baptisé", "Les évêques fixent le dogme chrétien (la Trinité)",
+          "Constantinople est fondée", "L'Empire est divisé"],
+      a: 1,
+      e: "Constantin réunit les évêques pour unifier l'Église : le dogme de la Trinité (Dieu, Jésus-Christ, Saint-Esprit), la résurrection et la vie éternelle y sont fixés."
+    },
+    {
+      q: "Pourquoi Constantin fonde-t-il Constantinople en 330 ?",
+      o: ["Pour fuir Rome devenue chrétienne",
+          "Pour disposer d'une deuxième Rome protégeant la frontière orientale",
+          "Pour y enterrer les empereurs",
+          "Pour y installer le Sénat uniquement"],
+      a: 1,
+      e: "Constantinople, bâtie sur le site de Byzance, est une « seconde Rome » chrétienne, mieux placée pour surveiller et défendre les frontières de l'Orient."
+    },
+    {
+      q: "Quel empereur impose le christianisme comme religion officielle ?",
+      o: ["Constantin en 313", "Théodose en 380", "Caracalla en 212", "Auguste en 27 av. J.-C."],
+      a: 1,
+      e: "Théodose, par l'édit de Thessalonique (380) : le christianisme devient la religion officielle, puis les cultes païens sont interdits (391-392)."
+    },
+    {
+      q: "Que signifie 476 ?",
+      o: ["Le partage de l'Empire en Orient et Occident",
+          "La mort de Constantin",
+          "Le renversement du dernier empereur romain d'Occident",
+          "La fondation de Constantinople"],
+      a: 2,
+      e: "En 476, le dernier empereur d'Occident est renversé par un chef germanique romanisé : seul subsiste l'Empire d'Orient, l'Empire byzantin. Le partage, lui, date de 395."
+    }
+  ];
+
+  var list = document.getElementById('quizList');
+  var scoreEl = document.getElementById('score');
+  var totalEl = document.getElementById('total');
+  var msgEl = document.getElementById('scoreMsg');
+  var answered = 0, score = 0;
+  var letters = ['A', 'B', 'C', 'D'];
+
+  function shuffle(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+    }
+    return arr;
+  }
+
+  function build() {
+    list.innerHTML = '';
+    answered = 0; score = 0;
+    scoreEl.textContent = '0';
+    totalEl.textContent = String(QUIZ.length);
+    msgEl.textContent = 'Réponds aux questions pour voir ton score.';
+
+    QUIZ.forEach(function (item, idx) {
+      var good = item.o[item.a];
+      var opts = shuffle(item.o.slice());
+
+      var card = document.createElement('div');
+      card.className = 'q';
+
+      var h = document.createElement('p');
+      h.className = 'qh';
+      h.innerHTML = '<span class="num">' + (idx + 1) + '</span><span>' + item.q + '</span>';
+      card.appendChild(h);
+
+      var box = document.createElement('div');
+      box.className = 'opts';
+
+      opts.forEach(function (txt, k) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'opt';
+        b.innerHTML = '<span class="ltr">' + letters[k] + '</span><span>' + txt + '</span>';
+        b.addEventListener('click', function () {
+          if (card.classList.contains('done')) return;
+          card.classList.add('done');
+          answered++;
+
+          var isGood = txt === good;
+          if (isGood) { b.classList.add('correct'); score++; }
+          else {
+            b.classList.add('wrong');
+            Array.prototype.forEach.call(box.children, function (c) {
+              if (c.textContent.indexOf(good) !== -1) c.classList.add('correct');
+            });
+          }
+          Array.prototype.forEach.call(box.children, function (c) { c.disabled = true; });
+          scoreEl.textContent = String(score);
+          msgEl.textContent = answered === QUIZ.length
+            ? (score >= 12 ? 'Excellent, le cours est acquis 🏆'
+              : score >= 9 ? 'Bien ! Relis les notions manquées.' : 'Courage : relis la fiche puis recommence 💪')
+            : 'Question ' + answered + ' / ' + QUIZ.length + ' traitée.';
+        });
+        box.appendChild(b);
+      });
+
+      card.appendChild(box);
+
+      var e = document.createElement('p');
+      e.className = 'expl';
+      e.innerHTML = '<strong>Correction :</strong> ' + item.e;
+      card.appendChild(e);
+
+      list.appendChild(card);
+    });
+  }
+
+  document.getElementById('resetQuiz').addEventListener('click', build);
+  build();
+})();
+</script>
+</body>
+</html>
